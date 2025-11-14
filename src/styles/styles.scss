@@ -1,0 +1,286 @@
+@import 'primeicons/primeicons';
+@import './design-tokens';
+@import './primevue-orange-theme';
+@import './utilities';
+
+// Global styles for professional appearance
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family-primary;
+  line-height: $line-height-normal;
+  color: $text-primary;
+  background-color: $background-secondary;
+}
+
+// ===== PRIMEVUE COMPONENT CUSTOMIZATIONS =====
+// Professional button overrides for PrimeVue
+.p-button {
+  font-weight: $font-weight-semibold;
+  border-radius: $border-radius-lg;
+  transition: all $transition-base;
+
+  &.p-button-primary {
+    background: $primary;
+    border-color: $primary;
+
+    &:hover {
+      background: $primary-dark;
+      border-color: $primary-dark;
+      transform: translateY(-1px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &.p-button-secondary {
+    background: $secondary;
+    border-color: $secondary;
+
+    &:hover {
+      background: $secondary-dark;
+      border-color: $secondary-dark;
+      transform: translateY(-1px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+}
+
+// Card styling improvements
+.p-card {
+  border-radius: $border-radius-xl;
+  overflow: hidden;
+  transition: all $transition-base;
+  box-shadow: $shadow-base;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-2px);
+  }
+
+  .p-card-content {
+    padding: $spacing-6;
+  }
+
+  .p-card-header {
+    padding: $spacing-6 $spacing-6 0;
+  }
+
+  .p-card-footer {
+    padding: 0 $spacing-6 $spacing-6;
+  }
+}
+
+// Progress bar styling
+.p-progressbar {
+  border-radius: $border-radius-lg;
+  background-color: $gray-200;
+
+  .p-progressbar-value {
+    background: $gradient-primary;
+    border-radius: $border-radius-lg;
+    transition: width $transition-slow;
+  }
+}
+
+// Timeline styling improvements
+.p-timeline {
+  .p-timeline-event-marker {
+    background: $primary;
+    border: 3px solid $primary-lightest;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .p-timeline-event-connector {
+    background: $gray-300;
+  }
+}
+
+// Panel styling
+.p-panel {
+  border-radius: $border-radius-xl;
+  border: none;
+  box-shadow: $shadow-base;
+
+  .p-panel-header {
+    background: $gradient-card;
+    border-radius: $border-radius-xl $border-radius-xl 0 0;
+    padding: $spacing-5;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+  }
+
+  .p-panel-content {
+    padding: $spacing-6;
+  }
+}
+
+// Chip styling
+.p-chip {
+  border-radius: $border-radius-lg;
+  font-weight: $font-weight-medium;
+  padding: $spacing-2 $spacing-4;
+  background: $primary-lightest;
+  color: $primary-dark;
+
+  &.p-chip-primary {
+    background: $primary;
+    color: $text-white;
+  }
+}
+
+// Avatar styling
+.p-avatar {
+  border-radius: 50%;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// Menubar styling
+.p-menubar {
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: $border-radius-xl;
+  padding: $spacing-3 $spacing-4;
+  box-shadow: $shadow-base;
+
+  .p-menuitem-link {
+    border-radius: $border-radius-lg;
+    transition: all $transition-base;
+
+    &:hover {
+      background: $primary-lightest;
+      color: $primary;
+    }
+
+    &.p-menuitem-link-active {
+      background: $primary;
+      color: $text-white;
+    }
+  }
+}
+
+// Badge styling
+.p-badge {
+  border-radius: $border-radius-full;
+  font-weight: $font-weight-medium;
+  padding: $spacing-1 $spacing-2;
+
+  &.p-badge-primary {
+    background: $primary;
+  }
+
+  &.p-badge-secondary {
+    background: $secondary;
+  }
+
+  &.p-badge-success {
+    background: $success;
+  }
+
+  &.p-badge-warning {
+    background: $warning;
+  }
+
+  &.p-badge-danger {
+    background: $danger;
+  }
+}
+
+// Tag styling
+.p-tag {
+  border-radius: $border-radius-lg;
+  font-weight: $font-weight-medium;
+  padding: $spacing-1 $spacing-3;
+
+  &.p-tag-primary {
+    background: $primary-lightest;
+    color: $primary-dark;
+  }
+}
+
+// Divider styling
+.p-divider {
+  border-color: $border-light;
+}
+
+// Progress Spinner styling
+.p-progressspinner {
+  .p-progressspinner-circle {
+    stroke: $primary;
+  }
+}
+
+// ===== GLOBAL ACCESSIBILITY & ENHANCEMENTS =====
+// Focus styles for accessibility
+*:focus {
+  outline: 2px solid $primary;
+  outline-offset: 2px;
+  border-radius: $border-radius-base;
+}
+
+// Custom scrollbar for webkit browsers
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $gray-300;
+  border-radius: $border-radius-base;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $gray-400;
+}
+
+// ===== RESPONSIVE DESIGN ENHANCEMENTS =====
+// Enhanced responsive text utilities
+@media (max-width: $breakpoint-md) {
+  .responsive-text-sm { font-size: $font-size-sm; }
+  .responsive-text-base { font-size: $font-size-base; }
+  .responsive-text-lg { font-size: $font-size-lg; }
+  .responsive-text-xl { font-size: $font-size-xl; }
+  .responsive-text-2xl { font-size: $font-size-2xl; }
+  .responsive-text-3xl { font-size: $font-size-3xl; }
+}
+
+// ===== PRINT STYLES =====
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .print-break {
+    page-break-before: always;
+  }
+
+  .print-avoid-break {
+    page-break-inside: avoid;
+  }
+}

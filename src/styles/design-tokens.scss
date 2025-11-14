@@ -1,0 +1,274 @@
+// Design Tokens for Jake Kohl's Portfolio
+// Centralized design system with orange as primary color
+
+// ===== COLOR PALETTE =====
+// Primary Orange Palette
+$orange-50: #fff7ed;
+$orange-100: #ffedd5;
+$orange-200: #fed7aa;
+$orange-300: #fdba74;
+$orange-400: #fb923c;
+$orange-500: #f97316; // Primary orange
+$orange-600: #ea580c;
+$orange-700: #c2410c;
+$orange-800: #9a3412;
+$orange-900: #7c2d12;
+
+// Neutral Palette
+$gray-50: #f9fafb;
+$gray-100: #f3f4f6;
+$gray-200: #e5e7eb;
+$gray-300: #d1d5db;
+$gray-400: #9ca3af;
+$gray-500: #6b7280;
+$gray-600: #4b5563;
+$gray-700: #374151;
+$gray-800: #1f2937;
+$gray-900: #111827;
+
+// Semantic Colors
+$primary: $orange-500;
+$primary-dark: $orange-600;
+$primary-light: $orange-400;
+$primary-lighter: $orange-300;
+$primary-lightest: $orange-100;
+
+$secondary: $gray-600;
+$secondary-dark: $gray-700;
+$secondary-light: $gray-500;
+
+$success: #10b981;
+$success-light: #34d399;
+$success-dark: #059669;
+
+$warning: #f59e0b;
+$warning-light: #fbbf24;
+$warning-dark: #d97706;
+
+$danger: #ef4444;
+$danger-light: #f87171;
+$danger-dark: #dc2626;
+
+$info: #3b82f6;
+$info-light: #60a5fa;
+$info-dark: #2563eb;
+
+// Background Colors
+$background-primary: #ffffff;
+$background-secondary: $gray-50;
+$background-tertiary: $gray-100;
+$background-dark: $gray-800;
+$background-darker: $gray-900;
+
+// Text Colors
+$text-primary: $gray-900;
+$text-secondary: $gray-600;
+$text-tertiary: $gray-500;
+$text-light: $gray-400;
+$text-white: #ffffff;
+$text-on-primary: #ffffff;
+
+// Border Colors
+$border-light: $gray-200;
+$border-medium: $gray-300;
+$border-dark: $gray-400;
+
+// ===== TYPOGRAPHY =====
+$font-family-primary: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$font-family-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// Font Sizes
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 1.875rem;  // 30px
+$font-size-4xl: 2.25rem;   // 36px
+$font-size-5xl: 3rem;      // 48px
+$font-size-6xl: 3.75rem;   // 60px
+
+// Line Heights
+$line-height-tight: 1.25;
+$line-height-snug: 1.375;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
+$line-height-loose: 2;
+
+// ===== SPACING =====
+$spacing-0: 0;
+$spacing-1: 0.25rem;   // 4px
+$spacing-2: 0.5rem;    // 8px
+$spacing-3: 0.75rem;   // 12px
+$spacing-4: 1rem;      // 16px
+$spacing-5: 1.25rem;   // 20px
+$spacing-6: 1.5rem;    // 24px
+$spacing-8: 2rem;      // 32px
+$spacing-10: 2.5rem;   // 40px
+$spacing-12: 3rem;     // 48px
+$spacing-16: 4rem;     // 64px
+$spacing-20: 5rem;     // 80px
+$spacing-24: 6rem;     // 96px
+$spacing-32: 8rem;     // 128px
+
+// ===== BORDER RADIUS =====
+$border-radius-none: 0;
+$border-radius-sm: 0.125rem;   // 2px
+$border-radius-base: 0.25rem;  // 4px
+$border-radius-md: 0.375rem;   // 6px
+$border-radius-lg: 0.5rem;     // 8px
+$border-radius-xl: 0.75rem;    // 12px
+$border-radius-2xl: 1rem;      // 16px
+$border-radius-3xl: 1.5rem;    // 24px
+$border-radius-full: 9999px;
+
+// ===== SHADOWS =====
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+$shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+// ===== BREAKPOINTS =====
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// ===== Z-INDEX =====
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+
+// ===== TRANSITIONS =====
+$transition-fast: 150ms ease-in-out;
+$transition-base: 300ms ease-in-out;
+$transition-slow: 500ms ease-in-out;
+
+// ===== COMPONENT SPECIFIC TOKENS =====
+// Button
+$button-height-sm: 2rem;
+$button-height-base: 2.5rem;
+$button-height-lg: 3rem;
+
+// Input
+$input-height-sm: 2rem;
+$input-height-base: 2.5rem;
+$input-height-lg: 3rem;
+
+// Card
+$card-padding-sm: $spacing-4;
+$card-padding-base: $spacing-6;
+$card-padding-lg: $spacing-8;
+
+// ===== GRADIENTS =====
+$gradient-primary: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+$gradient-secondary: linear-gradient(135deg, $secondary 0%, $secondary-dark 100%);
+$gradient-hero: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%);
+$gradient-hero-alt: linear-gradient(135deg, $gray-800 0%, $gray-900 100%);
+$gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+$gradient-accent-blue: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+
+// ===== CSS CUSTOM PROPERTIES =====
+:root {
+  // Colors
+  --color-primary: #{$primary};
+  --color-primary-dark: #{$primary-dark};
+  --color-primary-light: #{$primary-light};
+  --color-primary-lighter: #{$primary-lighter};
+  --color-primary-lightest: #{$primary-lightest};
+
+  --color-accent-blue: #2563eb;
+  --color-accent-blue-dark: #1d4ed8;
+  --color-accent-blue-darker: #1e40af;
+
+  --color-secondary: #{$secondary};
+  --color-secondary-dark: #{$secondary-dark};
+  --color-secondary-light: #{$secondary-light};
+
+  --color-success: #{$success};
+  --color-warning: #{$warning};
+  --color-danger: #{$danger};
+  --color-info: #{$info};
+
+  --color-background-primary: #{$background-primary};
+  --color-background-secondary: #{$background-secondary};
+  --color-background-tertiary: #{$background-tertiary};
+  --color-background-dark: #{$background-dark};
+
+  --color-text-primary: #{$text-primary};
+  --color-text-secondary: #{$text-secondary};
+  --color-text-tertiary: #{$text-tertiary};
+  --color-text-white: #{$text-white};
+
+  --color-border-light: #{$border-light};
+  --color-border-medium: #{$border-medium};
+  --color-border-dark: #{$border-dark};
+
+  // Typography
+  --font-family-primary: #{$font-family-primary};
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-base: #{$font-size-base};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-2xl: #{$font-size-2xl};
+  --font-size-3xl: #{$font-size-3xl};
+  --font-size-4xl: #{$font-size-4xl};
+  --font-size-5xl: #{$font-size-5xl};
+  --font-size-6xl: #{$font-size-6xl};
+
+  // Spacing
+  --spacing-1: #{$spacing-1};
+  --spacing-2: #{$spacing-2};
+  --spacing-3: #{$spacing-3};
+  --spacing-4: #{$spacing-4};
+  --spacing-5: #{$spacing-5};
+  --spacing-6: #{$spacing-6};
+  --spacing-8: #{$spacing-8};
+  --spacing-10: #{$spacing-10};
+  --spacing-12: #{$spacing-12};
+  --spacing-16: #{$spacing-16};
+  --spacing-20: #{$spacing-20};
+  --spacing-24: #{$spacing-24};
+  --spacing-32: #{$spacing-32};
+
+  // Border Radius
+  --border-radius-sm: #{$border-radius-sm};
+  --border-radius-base: #{$border-radius-base};
+  --border-radius-md: #{$border-radius-md};
+  --border-radius-lg: #{$border-radius-lg};
+  --border-radius-xl: #{$border-radius-xl};
+  --border-radius-2xl: #{$border-radius-2xl};
+  --border-radius-3xl: #{$border-radius-3xl};
+  --border-radius-full: #{$border-radius-full};
+
+  // Shadows
+  --shadow-sm: #{$shadow-sm};
+  --shadow-base: #{$shadow-base};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-xl: #{$shadow-xl};
+  --shadow-2xl: #{$shadow-2xl};
+
+  // Transitions
+  --transition-fast: #{$transition-fast};
+  --transition-base: #{$transition-base};
+  --transition-slow: #{$transition-slow};
+}

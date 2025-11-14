@@ -1,0 +1,235 @@
+<script setup>
+import { useRouter, useRoute } from 'vue-router';
+import { ref, computed } from 'vue';
+
+const router = useRouter();
+const route = useRoute();
+
+const items = ref([
+  {
+    label: 'Home',
+    icon: 'pi pi-home',
+    dataTest: 'nav-home',
+    command: () => {
+      router.push('/');
+    }
+  },
+  {
+    label: 'Projects',
+    icon: 'pi pi-briefcase',
+    dataTest: 'nav-projects',
+    command: () => {
+      router.push('/projects');
+    }
+  },
+  {
+    label: 'Contact',
+    icon: 'pi pi-envelope',
+    dataTest: 'nav-contact',
+    command: () => {
+      router.push('/contact');
+    }
+  }
+]);
+
+const socialLinks = ref([
+  {
+    icon: 'pi pi-github',
+    link: 'https://github.com/jakekohl',
+    dataTest: 'social-github'
+  },
+  {
+    icon: 'pi pi-linkedin',
+    link: 'https://linkedin.com/in/jacob-jp-kohl',
+    dataTest: 'social-linkedin'
+  }
+]);
+
+const currentPath = computed(() => route.path);
+
+const isActiveRoute = (label) => {
+  const routeMap = {
+    'Home': '/',
+    'About': '/about',
+    'Projects': '/projects',
+    'Contact': '/contact'
+  };
+  return currentPath.value === routeMap[label];
+};
+</script>
+
+<template>
+  <div class="full-width-nav">
+    <div class="nav-container">
+      <div class="nav-content">
+        <div class="nav-left">
+          <div class="brand-section" @click="router.push('/')" data-test="brand-slot">
+            <span class="brand-text">Jake Kohl</span>
+          </div>
+        </div>
+
+        <nav class="nav-center">
+          <a
+            v-for="item in items"
+            :key="item.label"
+            @click="item.command"
+            class="nav-item"
+            :class="{ 'active-nav': isActiveRoute(item.label) }"
+            :data-test="item.dataTest"
+          >
+            <i :class="item.icon" class="nav-icon"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        </nav>
+
+        <div class="nav-right">
+          <div class="social-links">
+            <a v-for="link in socialLinks" :key="link.link" :href="link.link" target="_blank" rel="noopener" class="social-link" :data-test="link.dataTest">
+              <i :class="link.icon"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+/* Full width navigation - no scoped styles to avoid conflicts */
+.full-width-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100vw;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.nav-content {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 0.75rem 0;
+  min-height: 60px;
+  width: 100%;
+}
+
+.nav-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.nav-center {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.brand-section:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.brand-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  letter-spacing: -0.025em;
+}
+
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  margin: 0 0.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-item:hover {
+  background: #fef3c7;
+  color: #f59e0b;
+  transform: translateY(-1px);
+}
+
+.active-nav {
+  background: #f59e0b;
+  color: white !important;
+}
+
+.active-nav:hover {
+  background: #d97706;
+  color: white !important;
+}
+
+.nav-icon {
+  font-size: 1rem;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  color: #6b7280;
+  text-decoration: none;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.social-link:hover {
+  background: #fef3c7;
+  color: #f59e0b;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .brand-text {
+    font-size: 1.25rem;
+  }
+
+  .nav-container {
+    padding: 0 0.5rem;
+  }
+
+  .nav-item {
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+  }
+}
+</style>
