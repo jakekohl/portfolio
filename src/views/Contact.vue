@@ -8,7 +8,7 @@ const specialties = ref([]);
 const fetchContactInfo = async () => {
   try {
     loading.value = true;
-    const response = await fetch('https://portfolio.jakekohl.dev/contact');
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/contact`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

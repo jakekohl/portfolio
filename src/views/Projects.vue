@@ -7,12 +7,21 @@ const projects = ref([]);
 const fetchProjects = async () => {
   try {
     loading.value = true;
-    const response = await fetch('https://portfolio.jakekohl.dev/projects');
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    projects.value = data;
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/projects`,
+        {
+          method: 'GET',
+          headers: {
+            'Origin': import.meta.env.VITE_APP_URL,
+            'Referrer': import.meta.env.VITE_APP_URL,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      projects.value = data;
   } catch (error) {
     console.error('Failed to fetch projects:', error);
     projects.value = [];
