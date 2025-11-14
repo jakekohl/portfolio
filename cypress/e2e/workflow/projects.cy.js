@@ -1,6 +1,8 @@
 describe('Projects', () => {
   beforeEach(() => {
-    cy.visit('/projects');
+    cy.visit('/');
+    cy.clickDataTest('nav-projects');
+    cy.url().should('include', '/projects');
   });
 
   it('should show a list of current projects', () => {
