@@ -12,6 +12,16 @@ describe('Projects', () => {
         status: 'In Development',
         images: [],
       },
+      {
+        title: 'Stride Builder',
+        status: 'In Development',
+        images: [],
+      },
+      {
+        title: 'Calculator',
+        status: 'In Development',
+        images: [],
+      }
     ];
 
     cy.getDataTest('ongoing-projects').should('be.visible').within(() => {
