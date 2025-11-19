@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from .projects_data import PROJECTS  # Import the data
+from lib.projects_service import ProjectsService
 from typing import Optional
 
 router = APIRouter()
@@ -19,4 +19,4 @@ class ProjectResponse(BaseModel):
 
 @router.get("/projects", response_model=list[ProjectResponse])
 async def get_projects():
-  return PROJECTS
+  return ProjectsService().get_projects()

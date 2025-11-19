@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from .contact_data import CONTACT, SPECIALTIES
+from lib.contact_service import ContactService
 
 router = APIRouter()
 
@@ -11,6 +11,6 @@ class ContactResponse(BaseModel):
 @router.get("/contact", response_model=ContactResponse)
 async def get_contact():
   return ContactResponse(
-    contact=CONTACT,
-    specialties=SPECIALTIES,
+    contact=ContactService().get_contact(),
+    specialties=ContactService().get_specialties(),
   )

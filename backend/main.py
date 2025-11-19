@@ -3,7 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from items import health, me, projects, contact
 from items.version import __version__
 from datetime import datetime
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 app = FastAPI(
   title="Jake Kohl Portfolio API",
   description="API for Jake Kohl Portfolio",
@@ -14,7 +16,7 @@ app = FastAPI(
 
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=["*"],
+  allow_origins=[os.getenv("CORS_DOMAINS")],
   allow_credentials=True,
   allow_methods=["*"],
   allow_headers=["*"],
