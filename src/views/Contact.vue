@@ -8,13 +8,20 @@ const specialties = ref([]);
 const fetchContactInfo = async () => {
   try {
     loading.value = true;
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/contact`);
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/contact`, {
+      method: 'GET',
+      headers: {
+        origin: import.meta.env.VITE_APP_URL,
+        referrer: import.meta.env.VITE_APP_URL, },
+      }
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    const contactResponse = await response.json();
-    contactInfo.value = contactResponse.contact;
-    specialties.value = contactResponse.specialties;
+    const data = await response.json();
+    contactInfo.value = data.contact;
+    specialties.value = data.specialties;
   } catch (error) {
     console.error('Failed to fetch contact info:', error);
     contactInfo.value = [];
