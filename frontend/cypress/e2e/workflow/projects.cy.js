@@ -21,7 +21,7 @@ describe('Projects', () => {
         title: 'Calculator',
         status: 'In Development',
         images: [],
-      }
+      },
     ];
 
     cy.getDataTest('ongoing-projects').should('be.visible').within(() => {
