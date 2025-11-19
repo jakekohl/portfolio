@@ -7,8 +7,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 app = FastAPI(
-  title="Jake Kohl Portfolio API",
-  description="API for Jake Kohl Portfolio",
+  title="Jake Kohl Portfolio",
+  description="API for Jake Kohl's Software Engineering Portfolio",
   version=__version__,
   docs_url="/docs",
   redoc_url="/redoc",
@@ -30,9 +30,8 @@ app.include_router(contact.router)
 @app.get("/")
 async def root():
   return {"message": "Hello World! Welcome to the Jake Kohl Portfolio API",
-    "docs": "https://jakekohl-portfolio-be.vercel.app/docs",
-    "redoc": "https://jakekohl-portfolio-be.vercel.app/redoc",
-    "repo": "https://github.com/jakekohl/jakekohl-portfolio-be",
+    "docs": "https://portfolio.jakekohl.com/docs",
+    "repo": "https://github.com/jakekohl/portfolio",
     "version": __version__,
     "timestamp": datetime.now(),
   }
