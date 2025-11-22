@@ -206,7 +206,7 @@ const openLiveDemo = (demoUrl) => {
           >
             <template #header>
               <div class="project-header">
-                <h3 class="project-title">{{ project.title }}</h3>
+                <h3 class="project-title" data-test="project-title">{{ project.title }}</h3>
                 <PrimeTag
                   value="Completed"
                   severity="success"
@@ -216,7 +216,7 @@ const openLiveDemo = (demoUrl) => {
               </div>
             </template>
             <template #content>
-              <p class="project-description">{{ project.description }}</p>
+              <p class="project-description" data-test="project-description">{{ project.description }}</p>
 
               <!-- Project Images -->
               <div v-if="project.images && project.images.length > 0" class="project-images">
@@ -238,7 +238,7 @@ const openLiveDemo = (demoUrl) => {
                 </div>
               </div>
 
-              <div class="project-technologies">
+              <div class="project-technologies" data-test="project-technologies">
                 <h4>Technologies Used:</h4>
                 <div class="tech-chips">
                   <PrimeChip
@@ -250,7 +250,7 @@ const openLiveDemo = (demoUrl) => {
                 </div>
               </div>
 
-              <div v-if="project.skillsLeveraged" class="project-skills">
+              <div v-if="project.skillsLeveraged" class="project-skills" data-test="project-skills">
                 <h4>Skills Leveraged:</h4>
                 <div class="skills-chips">
                   <PrimeChip
@@ -262,7 +262,7 @@ const openLiveDemo = (demoUrl) => {
                 </div>
               </div>
 
-              <div v-if="project.features" class="project-features">
+              <div v-if="project.features" class="project-features" data-test="project-features">
                 <h4>Key Features:</h4>
                 <ul>
                   <li v-for="feature in project.features" :key="feature">

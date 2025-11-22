@@ -11,16 +11,25 @@ describe('Projects', () => {
         title: 'Personal Portfolio Website',
         status: 'In Development',
         images: [],
+        dataTest: 'project-portfolio',
+        githubButton: true,
+        demoButton: true,
       },
       {
         title: 'Stride Builder',
         status: 'In Development',
         images: [],
+        dataTest: 'project-stride-builder',
+        githubButton: true,
+        demoButton: true,
       },
       {
         title: 'Calculator',
         status: 'In Development',
         images: [],
+        dataTest: 'project-calculator',
+        githubButton: true,
+        demoButton: false,
       },
     ];
 
@@ -32,7 +41,16 @@ describe('Projects', () => {
   });
 
   it('should show a list of completed projects', () => {
-    const completedProjects = [];
+    const completedProjects = [
+      {
+        dataTest: 'project-nurtured-heart-ai',
+        title: 'Nurtured Heart AI',
+        status: 'Completed',
+        images: [],
+        githubButton: true,
+        demoButton: true,
+      },
+    ];
 
     cy.getDataTest('completed-projects').should('be.visible').within(() => {
       completedProjects.forEach((project) => {
