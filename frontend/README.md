@@ -29,13 +29,11 @@ You can run the Cypress test suite against the deployed site (`https://www.jakek
 
 ```
 # Run Cypress locally against the deployed site
-npx cypress run --config baseUrl=https://www.jakekohl.dev
+npx cypress run # Run Mode
+npx cypress open # Open Mode
 
-# Or open the Cypress UI with the deployed site as baseUrl
-npx cypress open --config baseUrl=https://www.jakekohl.dev
-
-# Local Cypress Running will need both backend and frontend running
-npx cypress open
+# Launcgh Cypress both backend and frontend running locally
+npx cypress open --config baseUrl=http://localhost:5173 --env API_URL=http://localhost:8000
 ```
 
 ### Running Playwright Test Automations
