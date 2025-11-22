@@ -77,10 +77,19 @@ const softSkills = ref([
 const navigateToSection = (route) => {
   router.push(route);
 };
-const downloadResume = () => {
-  // Placeholder for resume download functionality
-  alert('Resume download would be implemented here');
-};
+
+async function downloadResume() {
+  // The resume file is placed in the public directory, making it directly accessible
+  const fileName = `${me.value?.name || 'Jake Kohl'}-resume.pdf`;
+  const resumeUrl = '/Resume_kohlJacob.pdf'; // path relative to public/
+
+  const a = document.createElement('a');
+  a.href = resumeUrl;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
 
 async function getMe() {
   try {
