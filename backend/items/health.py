@@ -11,5 +11,4 @@ async def health_check():
     "message": "API is running",
     "version": __version__,
     "timestamp": datetime.now(),
-    "repo": "https://github.com/jakekohl/jakekohl-portfolio-be",
   }

@@ -14,14 +14,27 @@ app = FastAPI(
   redoc_url="/redoc",
 )
 
+list_cors_domains = []
+
+cors_domains = os.getenv("CORS_DOMAINS")
+
+for domain in cors_domains.split(","):
+  list_cors_domains.append(domain.strip())
+
+if cors_domains is None:
+  list_cors_domains = ["*"]
+
+print(list_cors_domains)
+
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=[os.getenv("CORS_DOMAINS")],
+  allow_origins=list_cors_domains,
   allow_credentials=True,
   allow_methods=["*"],
   allow_headers=["*"],
 )
 
+# Include routers
 app.include_router(health.router)
 app.include_router(me.router)
 app.include_router(projects.router)
