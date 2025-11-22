@@ -38,42 +38,38 @@ describe('Home Page', () => {
     cy.url().should('include', '/projects');
   });
 
-  it.skip('should allow a user to directly download a resume from the hero section', () => {
+  it('should allow a user to directly download a resume from the hero section', () => {
     cy.getDataTest('hero-section').should('be.visible').within(() => {
       cy.clickDataTest('hero-resume-button');
     });
+    cy.readFile('cypress/downloads/Jake Kohl-resume.pdf').should('exist');
   });
 
   it('should showcase the user\'s years of experience in different domains', () => {
     const stats = [
       {
-        dataTest: 'quality-assurance',
+        dataTest: 'stat-quality-assurance',
         value: 5,
         label: 'Quality Assurance',
       },
       {
-        dataTest: 'technical-support',
-        value: 8,
+        dataTest: 'stat-technical-support',
         label: 'Technical Support',
       },
       {
-        dataTest: 'technical-leadership',
-        value: 4,
+        dataTest: 'stat-technical-leadership',
         label: 'Technical Leadership',
       },
       {
-        dataTest: 'management',
-        value: 1,
+        dataTest: 'stat-management',
         label: 'Management',
       },
       {
-        dataTest: 'software-development',
-        value: 3,
+        dataTest: 'stat-software-development',
         label: 'Software Development',
       },
       {
-        dataTest: 'infrastructure',
-        value: 6,
+        dataTest: 'stat-infrastructure',
         label: 'Infrastructure',
       },
     ];

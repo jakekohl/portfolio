@@ -164,7 +164,7 @@ onMounted(() => {
             v-for="exp in me?.experiences"
             :key="exp.type.toLowerCase().replace(/\s+/g, '-')"
             class="stat-card"
-            :data-test="`stat-${exp.type.toLowerCase().replace(/\s+/g, '-')}`"
+            :data-test="`stat-${exp.name.toLowerCase().replace(/\s+/g, '-')}`"
           >
             <PrimeCard class="stat-card-inner">
               <template #content>

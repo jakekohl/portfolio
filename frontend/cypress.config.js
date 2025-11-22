@@ -8,6 +8,7 @@ export default defineConfig({
   viewportHeight: 1080,
   video: true,
   screenshots: true,
+  downloadsFolder: 'cypress/downloads',
   e2e: {
     specPattern: 'cypress/e2e/**/*.{cy,spec}.{js,jsx,ts,tsx}',
     baseUrl: 'http://localhost:5173',

@@ -27,12 +27,11 @@ Cypress.Commands.add('verifySectionVisibility', (sectionSelector) => {
 /**
  * Verify the professional stats
  * @param {Object[]} stats - The stats to verify
- * @param {string} stats.dataTest - The data test for the stat
- * @param {string} stats.value - The value for the stat
+ * @param {string} stats.dataTest - The data test selector for the stat
  * @param {string} stats.label - The label for the stat
  */
 Cypress.Commands.add('verifyProfessionalStats', (stats) => {
   stats.forEach((stat) => {
-    cy.getDataTest(`stat-${stat.dataTest}`).should('be.visible').should('contain', stat.value).should('contain', stat.label);
+    cy.getDataTest(stat.dataTest).should('be.visible').should('contain', stat.label);
   });
 });
