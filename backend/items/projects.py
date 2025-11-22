@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 from lib.projects_service import ProjectsService
-from typing import Optional
+from typing import Optional, Dict
 
 router = APIRouter()
 
@@ -15,7 +15,7 @@ class ProjectResponse(BaseModel):
   demo: Optional[str] = None
   features: list[str]
   dataTest: str
-  images: list[str]
+  images: list[Dict[str, str]]
 
 @router.get("/projects", response_model=list[ProjectResponse])
 async def get_projects():

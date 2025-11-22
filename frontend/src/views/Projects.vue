@@ -60,6 +60,20 @@ const openGithubRepo = (githubUrl) => {
 const openLiveDemo = (demoUrl) => {
   openExternalLink(demoUrl);
 };
+
+// Image gallery dialog state
+const selectedImage = ref(null);
+const dialogVisible = ref(false);
+
+const openImageDialog = (image) => {
+  selectedImage.value = image;
+  dialogVisible.value = true;
+};
+
+const closeImageDialog = () => {
+  dialogVisible.value = false;
+  selectedImage.value = null;
+};
 </script>
 
 <template>
@@ -116,15 +130,21 @@ const openLiveDemo = (demoUrl) => {
                   <div
                     v-for="(image, index) in project.images"
                     :key="index"
-                    class="image-container"
+                    class="image-thumbnail-container"
+                    @click="openImageDialog(image)"
                   >
-                    <img
-                      :src="image.src"
-                      :alt="image.alt"
-                      class="project-image"
-                      @error="$event.target.style.display='none'"
-                    />
-                    <p v-if="image.caption" class="image-caption">{{ image.caption }}</p>
+                    <div class="image-thumbnail-wrapper">
+                      <img
+                        :src="image.src"
+                        :alt="image.alt"
+                        class="image-thumbnail"
+                        @error="$event.target.style.display='none'"
+                      />
+                      <div class="image-overlay">
+                        <i class="pi pi-search-plus"></i>
+                      </div>
+                    </div>
+                    <p v-if="image.caption" class="image-caption-thumbnail">{{ image.caption }}</p>
                   </div>
                 </div>
               </div>
@@ -225,15 +245,21 @@ const openLiveDemo = (demoUrl) => {
                   <div
                     v-for="(image, index) in project.images"
                     :key="index"
-                    class="image-container"
+                    class="image-thumbnail-container"
+                    @click="openImageDialog(image)"
                   >
-                    <img
-                      :src="image.src"
-                      :alt="image.alt"
-                      class="project-image"
-                      @error="$event.target.style.display='none'"
-                    />
-                    <p v-if="image.caption" class="image-caption">{{ image.caption }}</p>
+                    <div class="image-thumbnail-wrapper">
+                      <img
+                        :src="image.src"
+                        :alt="image.alt"
+                        class="image-thumbnail"
+                        @error="$event.target.style.display='none'"
+                      />
+                      <div class="image-overlay">
+                        <i class="pi pi-search-plus"></i>
+                      </div>
+                    </div>
+                    <p v-if="image.caption" class="image-caption-thumbnail">{{ image.caption }}</p>
                   </div>
                 </div>
               </div>
@@ -309,6 +335,29 @@ const openLiveDemo = (demoUrl) => {
         </PrimeCard>
       </div>
     </div>
+
+    <!-- Image Preview Dialog -->
+    <PrimeDialog
+      v-model:visible="dialogVisible"
+      :modal="true"
+      :closable="true"
+      :draggable="false"
+      :style="{ width: '90vw', maxWidth: '1200px' }"
+      class="image-dialog"
+      @hide="closeImageDialog"
+    >
+      <template #header>
+        <h3 class="dialog-title">Image Preview</h3>
+      </template>
+      <div v-if="selectedImage" class="dialog-content">
+        <img
+          :src="selectedImage.src"
+          :alt="selectedImage.alt"
+          class="dialog-image"
+        />
+        <p v-if="selectedImage.caption" class="dialog-caption">{{ selectedImage.caption }}</p>
+      </div>
+    </PrimeDialog>
   </div>
 </template>
 
@@ -439,30 +488,113 @@ const openLiveDemo = (demoUrl) => {
   margin-bottom: var(--spacing-4);
 }
 
-.image-container {
+.image-thumbnail-container {
   text-align: center;
+  cursor: pointer;
+  transition: var(--transition-base);
+  display: flex;
+  flex-direction: column;
 }
 
-.project-image {
+.image-thumbnail-container:hover {
+  transform: translateY(-4px);
+}
+
+.image-thumbnail-wrapper {
+  position: relative;
   width: 100%;
-  height: auto;
-  max-height: 200px;
-  object-fit: cover;
+  aspect-ratio: 1;
+  overflow: hidden;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-base);
+  background: var(--background-secondary);
+  margin-bottom: var(--spacing-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: var(--transition-base);
+  padding: var(--spacing-2);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
   transition: var(--transition-base);
 }
 
-.project-image:hover {
-  transform: scale(1.05);
+.image-thumbnail-container:hover .image-overlay {
+  opacity: 1;
 }
 
-.image-caption {
+.image-overlay i {
+  color: white;
+  font-size: 2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.image-caption-thumbnail {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   margin-top: var(--spacing-2);
   font-style: italic;
   font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.image-dialog :deep(.p-dialog-header) {
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.dialog-title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+.dialog-content {
+  text-align: center;
+  padding: var(--spacing-4);
+}
+
+.dialog-image {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: var(--spacing-4);
+}
+
+.dialog-caption {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  font-style: italic;
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-relaxed);
+  padding: 0 var(--spacing-4);
 }
 
 .project-technologies h4,
@@ -574,6 +706,14 @@ const openLiveDemo = (demoUrl) => {
 
   .images-grid {
     grid-template-columns: 1fr;
+  }
+
+  .images-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .dialog-image {
+    max-height: 60vh;
   }
 
   .project-header {

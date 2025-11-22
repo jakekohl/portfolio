@@ -46,7 +46,11 @@ describe('Projects', () => {
         dataTest: 'project-nurtured-heart-ai',
         title: 'Nurtured Heart AI',
         status: 'Completed',
-        images: [],
+        images: [
+          'nha1.png',
+          'nha2.png',
+          'nha3.png',
+        ],
         githubButton: true,
         demoButton: true,
       },

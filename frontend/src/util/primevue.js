@@ -10,6 +10,7 @@ import Panel from 'primevue/panel';
 import Timeline from 'primevue/timeline';
 import ProgressBar from 'primevue/progressbar';
 import ProgressSpinner from 'primevue/progressspinner';
+import Dialog from 'primevue/dialog';
 import CustomButton from '../components/CustomButton.vue';
 
 // Orange theme configuration for PrimeVue
@@ -69,6 +70,7 @@ export default {
     app.component('PrimeTimeline', Timeline);
     app.component('PrimeProgressBar', ProgressBar);
     app.component('PrimeProgressSpinner', ProgressSpinner);
+    app.component('PrimeDialog', Dialog);
 
     // Custom components
     app.component('CustomButton', CustomButton);
