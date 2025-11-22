@@ -42,7 +42,7 @@ describe('Home Page', () => {
     cy.getDataTest('hero-section').should('be.visible').within(() => {
       cy.clickDataTest('hero-resume-button');
     });
-    cy.readFile('cypress/downloads/Jake Kohl-resume.pdf').should('exist');
+    cy.readFile('cypress/downloads/Resume_kohlJacob.pdf').should('exist');
   });
 
   it('should showcase the user\'s years of experience in different domains', () => {

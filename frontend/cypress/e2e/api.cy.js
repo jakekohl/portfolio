@@ -1,7 +1,9 @@
 describe('API Tests', () => {
 
+  const apiUrl = Cypress.env('API_URL') || 'http://localhost:8000';
+
   it('GET /health should return a 200 status code and a message indicating the API is running', () => {
-    cy.request('GET', 'http://localhost:8000/health').then((response) => {
+    cy.request('GET', `${apiUrl}/health`).then((response) => {
       expect(response.status).to.eq(200)
       expect(response.body).to.be.an('object')
       expect(response.body).to.have.property('status').to.eq('ok')
@@ -12,7 +14,7 @@ describe('API Tests', () => {
   })
 
   it('GET /me should return a 200 status code and a message indicating the API is running', () => {
-    cy.request('GET', 'http://localhost:8000/me').then((response) => {
+    cy.request('GET', `${apiUrl}/me`).then((response) => {
       expect(response.status).to.eq(200)
       expect(response.body).to.be.an('object')
       expect(response.body).to.have.property('name').to.be.a('string')
@@ -22,7 +24,7 @@ describe('API Tests', () => {
   })
 
   it('GET /projects should return a 200 status code and a list of projects', () => {
-    cy.request('GET', 'http://localhost:8000/projects').then((response) => {
+    cy.request('GET', `${apiUrl}/projects`).then((response) => {
       expect(response.status).to.eq(200)
       expect(response.body).to.be.an('array')
       expect(response.body.length).to.be.greaterThan(0)
@@ -30,7 +32,7 @@ describe('API Tests', () => {
   })
 
   it('GET /contact should return a 200 status code for the contact page', () => {
-    cy.request('GET', 'http://localhost:8000/contact').then((response) => {
+    cy.request('GET', `${apiUrl}/contact`).then((response) => {
       expect(response.status).to.eq(200)
       expect(response.body).to.be.an('object')
       expect(response.body).to.have.property('contact').to.be.an('Array')

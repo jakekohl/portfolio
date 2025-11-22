@@ -79,9 +79,8 @@ const navigateToSection = (route) => {
 };
 
 async function downloadResume() {
-  // The resume file is placed in the public directory, making it directly accessible
-  const fileName = `${me.value?.name || 'Jake Kohl'}-resume.pdf`;
-  const resumeUrl = '/Resume_kohlJacob.pdf'; // path relative to public/
+  const fileName = 'Resume_kohlJacob.pdf';
+  const resumeUrl = '/Resume_kohlJacob.pdf';
 
   const a = document.createElement('a');
   a.href = resumeUrl;

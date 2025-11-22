@@ -11,7 +11,7 @@ export default defineConfig({
   downloadsFolder: 'cypress/downloads',
   e2e: {
     specPattern: 'cypress/e2e/**/*.{cy,spec}.{js,jsx,ts,tsx}',
-    baseUrl: 'http://localhost:5173',
+    baseUrl: 'https://www.jakekohl.dev',
   },
   component: {
     specPattern: 'src/**/__tests__/*.{cy,spec}.{js,ts,jsx,tsx}',
@@ -19,5 +19,8 @@ export default defineConfig({
       framework: 'vue',
       bundler: 'vite',
     },
+  },
+  env: {
+    API_URL: process.env.VITE_API_URL || 'https://portfolio.jakekohl.dev',
   },
 });

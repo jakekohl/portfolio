@@ -1,9 +1,7 @@
 describe('Contact Page', () => {
   beforeEach(() => {
-    cy.visit('/contact');
-  });
-
-  it('should display the contact page', () => {
+    cy.visit('/');
+    cy.clickDataTest('nav-contact');
     cy.url().should('include', '/contact');
   });
 
