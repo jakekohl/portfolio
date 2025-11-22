@@ -1,5 +1,6 @@
 <script setup>
 import TopNav from './components/TopNav.vue';
+import Toast from 'primevue/toast';
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import TopNav from './components/TopNav.vue';
     <main>
       <RouterView />
     </main>
+    <Toast position="bottom-right" />
   </div>
 </template>
 

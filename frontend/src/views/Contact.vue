@@ -1,9 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-
+import { useToast } from 'primevue/usetoast';
 const loading = ref(true);
 const contactInfo = ref([]);
 const specialties = ref([]);
+
+const toast = useToast();
 
 const fetchContactInfo = async () => {
   try {
@@ -34,8 +36,18 @@ const fetchContactInfo = async () => {
 const copyToClipboard = async (text) => {
   try {
     await navigator.clipboard.writeText(text);
+    toast.add({
+      severity: 'success',
+      summary: 'Copied to clipboard',
+      life: 3000,
+    });
   } catch (err) {
     console.error('Failed to copy:', err);
+    toast.add({
+      severity: 'error',
+      summary: 'Failed to copy',
+      life: 3000,
+    });
   }
 };
 
@@ -73,7 +85,7 @@ onMounted(() => {
 
         <div class="contact-content">
           <!-- Specialties -->
-          <section class="specialties-section">
+          <section class="specialties-section" data-test="specialties-section">
           <h2 class="section-title">What I Can Help You With</h2>
           <div class="specialties-grid">
             <PrimeCard
@@ -87,7 +99,7 @@ onMounted(() => {
                   <div class="specialty-icon">
                     <i :class="specialty.icon" class="text-primary"></i>
                   </div>
-                  <h3 class="specialty-title">{{ specialty.title }}</h3>
+                  <h3 class="specialty-title" data-test="specialty-title">{{ specialty.title }}</h3>
                   <p class="specialty-description">{{ specialty.description }}</p>
                 </div>
               </template>
@@ -105,7 +117,7 @@ onMounted(() => {
         </div>
 
         <!-- Contact Methods -->
-        <section class="contact-methods">
+        <section class="contact-methods" data-test="contact-methods-section">
           <h2 class="section-title">Contact Information</h2>
           <div class="contact-grid">
             <PrimeCard
@@ -120,22 +132,22 @@ onMounted(() => {
                     <div class="contact-icon">
                       <i :class="contact.icon" class="text-primary" />
                     </div>
-                    <h3 class="contact-type">{{ contact.type }}</h3>
+                    <h3 class="contact-type" data-test="contact-type">{{ contact.type }}</h3>
                   </div>
                   <div class="contact-value-wrapper">
-                    <a v-if="contact.link" :href="contact.link" target="_blank" class="contact-value" :data-test="`contact-url`">
+                    <a v-if="contact.link" :href="contact.link" target="_blank" class="contact-value" data-test="contact-value">
                       {{ contact.value }}
                     </a>
-                    <span v-else class="contact-value">{{ contact.value }}</span>
+                    <span v-else class="contact-value" data-test="contact-value">{{ contact.value }}</span>
                     <PrimeButton
                       icon="pi pi-copy"
                       size="small"
                       class="copy-button"
-                      :data-test="`contact-copy`"
-                      @click="copyToClipboard(contact.value)"
+                      data-test="contact-copy"
+                      @click="copyToClipboard(contact.link.includes('http') ? contact.link : contact.value)"
                     />
                   </div>
-                  <p class="contact-description">{{ contact.description }}</p>
+                  <p class="contact-description" data-test="contact-description">{{ contact.description }}</p>
                 </div>
               </template>
             </PrimeCard>
