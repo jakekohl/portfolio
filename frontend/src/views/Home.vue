@@ -1,8 +1,10 @@
 <script setup>
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const router = useRouter();
+
+const me = ref(null);
 
 const testSkills = ref([
   { name: 'API'},
@@ -72,15 +74,6 @@ const softSkills = ref([
   { name: 'Team Management'},
 ]);
 
-const stats = ref([
-  { label: 'Quality Assurance', value: '5', icon: 'pi pi-hammer' },
-  { label: 'Technical Support', value: '8', icon: 'pi pi-search' },
-  { label: 'Software Development', value: '3', icon: 'pi pi-code' },
-  { label: 'Infrastructure', value: '6', icon: 'pi pi-server' },
-  { label: 'Technical Leadership', value: '4', icon: 'pi pi-arrow-up-right' },
-  { label: 'Management', value: '1', icon: 'pi pi-users' },
-]);
-
 const navigateToSection = (route) => {
   router.push(route);
 };
@@ -88,6 +81,20 @@ const downloadResume = () => {
   // Placeholder for resume download functionality
   alert('Resume download would be implemented here');
 };
+
+async function getMe() {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/me`);
+    const data = await response.json();
+    me.value = data;
+  } catch (error) {
+    console.error('Error fetching me:', error);
+  }
+}
+
+onMounted(() => {
+  getMe();
+});
 </script>
 
 <template>
@@ -98,10 +105,10 @@ const downloadResume = () => {
         <div class="hero-text">
           <h1 class="hero-title">
             Hi, I'm
-            <span class="name-highlight">Jake Kohl</span>
+            <span class="name-highlight">{{ me?.name || 'Jake Kohl' }}</span>
           </h1>
           <h2 class="hero-subtitle">
-            Quality Assurance Engineer | Test Automation Enthusiast
+            {{ me?.title || 'Quality Assurance Engineer | Test Automation Enthusiast' }}
           </h2>
           <p class="hero-description">
             Passionate about creating comprehensive testing solutions within <b>Cypress</b> and <b>Playwright</b>.
@@ -129,7 +136,7 @@ const downloadResume = () => {
         </div>
         <div class="hero-image">
           <PrimeAvatar
-            image="https://avatars.githubusercontent.com/u/9215669?v=4"
+            :image="me?.avatarUrl || 'https://avatars.githubusercontent.com/u/9215669?v=4'"
             size="xlarge"
             shape="circle"
             class="profile-avatar"
@@ -145,17 +152,17 @@ const downloadResume = () => {
       <div class="content-wrapper">
         <div class="stats-grid">
           <div
-            v-for="stat in stats"
-            :key="stat.label"
+            v-for="exp in me?.experiences"
+            :key="exp.type.toLowerCase().replace(/\s+/g, '-')"
             class="stat-card"
-            :data-test="`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`"
+            :data-test="`stat-${exp.type.toLowerCase().replace(/\s+/g, '-')}`"
           >
             <PrimeCard class="stat-card-inner">
               <template #content>
                 <div class="stat-content">
-                  <i :class="stat.icon" class="stat-icon"></i>
-                  <div class="stat-value">{{ stat.value }}</div>
-                  <div class="stat-label">{{ stat.label }}</div>
+                  <i :class="exp?.icon || 'pi pi-briefcase'" class="stat-icon"></i>
+                  <div class="stat-value">{{ exp?.years || '0' }}</div>
+                  <div class="stat-label">{{ exp?.name || 'Experience' }}</div>
                 </div>
               </template>
             </PrimeCard>
