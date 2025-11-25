@@ -1,8 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 from lib.contact_service import ContactService
 
-router = APIRouter()
+router = APIRouter(tags=["contact"])
 
 class ContactResponse(BaseModel):
   contact: list[dict]
@@ -10,7 +10,13 @@ class ContactResponse(BaseModel):
 
 @router.get("/contact", response_model=ContactResponse)
 async def get_contact():
-  return ContactResponse(
-    contact=ContactService().get_contact(),
-    specialties=ContactService().get_specialties(),
-  )
+  try:
+    return ContactResponse(
+      contact=ContactService().get_contact(),
+      specialties=ContactService().get_specialties(),
+    )
+  except Exception as e:
+    raise HTTPException(
+      status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+      detail="Service temporarily unavailable. Please try again later."
+    )

@@ -1,4 +1,4 @@
-# jakekohl-portfolio-be
+# Backend Services
 Simple backend for hosting data for [Jake Kohl's Professional Portfolio Site](https://www.jakekohl.dev)
 
 ## Getting Started
@@ -9,7 +9,7 @@ git clone https://github.com/jakekohl/portfolio
 
 # Install requirements
 cd backend
-pip install -R requirements.txt
+pip install -r requirements.txt
 
 # Run the main.py
 python main.py

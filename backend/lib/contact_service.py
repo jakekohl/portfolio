@@ -1,4 +1,5 @@
 import util.db
+from pymongo.errors import ServerSelectionTimeoutError, ConnectionFailure, PyMongoError
 
 class ContactService:
   def __init__(self):
@@ -8,7 +9,17 @@ class ContactService:
     self.specialties_collection = util.db.get_collection(specialties_collection_name)
 
   def get_contact(self):
-    return [util.db.convert_objectid_to_str(contact) for contact in self.contact_collection.find()]
+    try:
+      return [util.db.convert_objectid_to_str(contact) for contact in self.contact_collection.find()]
+    except (ServerSelectionTimeoutError, ConnectionFailure, PyMongoError) as e:
+      print(f"MongoDB connection error in get_contact: {str(e)}")
+      # Return empty list instead of crashing
+      return []
 
   def get_specialties(self):
-    return [util.db.convert_objectid_to_str(specialty) for specialty in self.specialties_collection.find()]
+    try:
+      return [util.db.convert_objectid_to_str(specialty) for specialty in self.specialties_collection.find()]
+    except (ServerSelectionTimeoutError, ConnectionFailure, PyMongoError) as e:
+      print(f"MongoDB connection error in get_specialties: {str(e)}")
+      # Return empty list instead of crashing
+      return []
