@@ -10,7 +10,11 @@ describe('Projects', () => {
       {
         title: 'Personal Portfolio Website',
         status: 'In Development',
-        images: [],
+        images: [
+          'portfolio1.png',
+          'portfolio2.png',
+          'portfolio3.png',
+        ],
         dataTest: 'project-portfolio',
         githubButton: true,
         demoButton: true,

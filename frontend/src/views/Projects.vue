@@ -239,7 +239,7 @@ const closeImageDialog = () => {
               <p class="project-description" data-test="project-description">{{ project.description }}</p>
 
               <!-- Project Images -->
-              <div v-if="project.images && project.images.length > 0" class="project-images">
+              <div v-if="project.images && project.images.length > 0" class="project-images" data-test="project-images">
                 <h4>Project Screenshots:</h4>
                 <div class="images-grid">
                   <div
