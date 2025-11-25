@@ -74,7 +74,7 @@ export default {
     app.component('PrimeProgressSpinner', ProgressSpinner);
     app.component('PrimeDialog', Dialog);
     app.component('PrimeDropdown', Dropdown);
-    
+
     // Register tooltip directive globally
     app.directive('tooltip', Tooltip);
 

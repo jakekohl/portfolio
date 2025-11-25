@@ -298,15 +298,15 @@ onMounted(() => {
       
       <PrimeCard v-else-if="stats" class="heatmap-card">
         <template #content>
-          <div class="heatmap-container">
+          <div class="heatmap-container" data-test="github-heatmap-component">
             <div class="heatmap-wrapper">
               <div class="heatmap-grid-container">
                 <div class="contributions-header">
                   <div class="contributions-text">
-                    <span class="contributions-count">
+                    <span class="contributions-count" data-test="github-contributions-count">
                       {{ stats.totalContributions || 0 }} contributions
                     </span>
-                    <span v-if="formattedLastUpdated" class="last-updated">
+                    <span v-if="formattedLastUpdated" class="last-updated" data-test="github-selected-year">
                       in {{ selectedYear }}
                     </span>
                   </div>
@@ -321,7 +321,7 @@ onMounted(() => {
                       :pt="{
                         panel: { class: 'year-dropdown-panel' }
                       }"
-                      data-test="year-selector"
+                      data-test="github-year-selector"
                       :showClear="false"
                     />
                   </div>
@@ -371,7 +371,7 @@ onMounted(() => {
                     </div>
                     <span class="legend-label">More</span>
                   </div>
-                  <div v-if="formattedLastUpdated" class="legend-meta">
+                  <div v-if="formattedLastUpdated" class="legend-meta" data-test="github-last-updated">
                     Last updated {{ formattedLastUpdated }}
                   </div>
                 </div>
