@@ -9,11 +9,19 @@ MONGODB_USER = os.getenv("MONGODB_USER")
 MONGODB_PASS = os.getenv("MONGODB_PASS")
 MONGODB_CLUSTER = os.getenv("MONGODB_CLUSTER")
 MONGODB_APPNAME = os.getenv("MONGODB_APPNAME")
+ENVIRONMENT = os.getenv("ENVIRONMENT", "dev").lower()
 
 uri = f"mongodb+srv://{MONGODB_USER}:{MONGODB_PASS}@{MONGODB_CLUSTER}.mongodb.net/?appName={MONGODB_APPNAME}"
 
+# Configure SSL/TLS based on environment
+# In dev, allow invalid certificates to work around SSL certificate issues
+# In production, use strict SSL verification
+# Note: tlsAllowInvalidCertificates=True should only be used in development
+# For production, ensure proper SSL certificates are configured
+
 # Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi('1'))
+# tlsAllowInvalidCertificates is set to True only in dev environment to handle SSL certificate issues
+client = MongoClient(uri, server_api=ServerApi('1'), tlsAllowInvalidCertificates=(ENVIRONMENT == "dev"))
 
 # Get the database
 db = client.get_database("portfolio")

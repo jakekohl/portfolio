@@ -35,3 +35,23 @@ Cypress.Commands.add('verifyProfessionalStats', (stats) => {
     cy.getDataTest(stat.dataTest).should('be.visible').should('contain', stat.label);
   });
 });
+
+/**
+ * Verify the github heatmap component
+ */
+Cypress.Commands.add('verifyGitHubHeatmap', () => {
+  cy.getDataTest('github-heatmap-component').should('be.visible').within(() => {
+    cy.getDataTest('github-contributions-count').should('be.visible');
+    cy.getDataTest('github-year-selector').should('be.visible');
+    cy.getDataTest('github-last-updated').should('be.visible');
+  });
+});
+
+/**
+ * Select a github year
+ * @param {string} year - The year to select
+ */
+Cypress.Commands.add('selectGitHubYear', (year) => {
+  cy.clickDataTest('github-year-selector');
+  cy.clickAriaLabel(year);
+});

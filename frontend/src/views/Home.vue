@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue';
+import GitHubHeatmap from '../components/GitHubHeatmap.vue';
 
 const router = useRouter();
 
@@ -178,6 +179,9 @@ onMounted(() => {
         </div>
       </div>
     </section>
+
+    <!-- GitHub Activity Section -->
+    <GitHubHeatmap />
 
     <!-- Skills Preview Section -->
     <section class="skills-preview-section" data-test="skills-section">

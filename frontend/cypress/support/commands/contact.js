@@ -24,7 +24,7 @@ Cypress.Commands.add('verifyContactMethods', (contactMethod) => {
       cy.getDataTest('contact-type').should('be.visible').should('contain', contactMethod.label);
       cy.getDataTest('contact-value').should('be.visible').should('have.attr', 'href', contactMethod.link);
       cy.getDataTest('contact-description').should('be.visible');
-      cy.clickDataTest('contact-copy')
+      cy.clickDataTest('contact-copy');
       cy.window().then((win) => {
         cy.wrap(win.navigator.clipboard.readText()).should('contain', contactMethod.copy);
       });

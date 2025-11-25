@@ -11,6 +11,8 @@ import Timeline from 'primevue/timeline';
 import ProgressBar from 'primevue/progressbar';
 import ProgressSpinner from 'primevue/progressspinner';
 import Dialog from 'primevue/dialog';
+import Dropdown from 'primevue/dropdown';
+import Tooltip from 'primevue/tooltip';
 import CustomButton from '../components/CustomButton.vue';
 
 // Orange theme configuration for PrimeVue
@@ -71,6 +73,10 @@ export default {
     app.component('PrimeProgressBar', ProgressBar);
     app.component('PrimeProgressSpinner', ProgressSpinner);
     app.component('PrimeDialog', Dialog);
+    app.component('PrimeDropdown', Dropdown);
+
+    // Register tooltip directive globally
+    app.directive('tooltip', Tooltip);
 
     // Custom components
     app.component('CustomButton', CustomButton);

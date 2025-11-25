@@ -88,6 +88,20 @@ describe('Home Page', () => {
     });
   });
 
+  it('should showcase the user\'s github activity', () => {
+    cy.getDataTest('github-heatmap-section').should('be.visible').within(() => {
+      cy.intercept('GET', '/github-stats?year=2024').as('githubStats');
+      cy.contains('GitHub Activity').should('be.visible');
+      cy.getDataTest('github-activity-link').should('be.visible').and('have.attr', 'href', 'https://github.com/jakekohl');
+      cy.verifyGitHubHeatmap();
+    });
+    cy.selectGitHubYear('2024');
+    cy.wait('@githubStats').then(response => {
+      cy.getDataTest('github-contributions-count').should('be.visible').and('contain', response.response.body.totalContributions.toString());
+      cy.getDataTest('github-selected-year').should('be.visible').and('contain', response.response.body.year.toString());
+    });
+  });
+
   it('should show a call-to-action featuring a button link for connecting with the user', () => {
     cy.getDataTest('cta-section').should('be.visible').within(() => {
       cy.clickDataTest('contact-cta-button');

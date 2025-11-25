@@ -1,9 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 from lib.projects_service import ProjectsService
 from typing import Optional, Dict
 
-router = APIRouter()
+router = APIRouter(tags=["projects"])
 
 class ProjectResponse(BaseModel):
   title: str
@@ -19,4 +19,11 @@ class ProjectResponse(BaseModel):
 
 @router.get("/projects", response_model=list[ProjectResponse])
 async def get_projects():
-  return ProjectsService().get_projects()
+  try:
+    projects = ProjectsService().get_projects()
+    return projects
+  except Exception as e:
+    raise HTTPException(
+      status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+      detail="Service temporarily unavailable. Please try again later."
+    )
