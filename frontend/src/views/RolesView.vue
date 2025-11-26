@@ -88,9 +88,9 @@ onMounted(() => {
         <div class="roles-grid" data-test="roles-grid">
           <PrimeCard
             v-for="role in roles"
-            :key="role._id"
+            :key="role.dataTest"
             class="role-card"
-            :data-test="`role-${role._id}`"
+            :data-test="`role-${role.dataTest}`"
           >
             <template #header>
               <div class="role-header">

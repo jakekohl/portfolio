@@ -22,7 +22,10 @@ describe('Projects', () => {
       {
         title: 'Stride Builder',
         status: 'In Development',
-        images: [],
+        images: [
+          'sb1.png',
+          'sb2.png',
+        ],
         dataTest: 'project-stride-builder',
         githubButton: true,
         demoButton: true,

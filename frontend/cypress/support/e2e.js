@@ -5,3 +5,4 @@ import './helpers/general';
 import './commands/home';
 import './commands/projects';
 import './commands/contact';
+import './commands/roles';
