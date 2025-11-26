@@ -25,7 +25,7 @@ const fetchContactInfo = async () => {
     contactInfo.value = data.contact;
     specialties.value = data.specialties;
   } catch (error) {
-    console.error('Failed to fetch contact info:', error);
+    toast.add({ severity: 'error', summary: 'Failed to fetch contact info', detail: error.message, life: 3000 });
     contactInfo.value = [];
     specialties.value = [];
   } finally {
@@ -42,7 +42,7 @@ const copyToClipboard = async (text) => {
       life: 3000,
     });
   } catch (err) {
-    console.error('Failed to copy:', err);
+    toast.add({ severity: 'error', summary: 'Failed to copy', detail: err.message, life: 3000 });
     toast.add({
       severity: 'error',
       summary: 'Failed to copy',

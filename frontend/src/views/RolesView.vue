@@ -1,9 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useToast } from 'primevue/usetoast';
 
 const loading = ref(true);
 const roles = ref([]);
-
+const toast = useToast();
 const fetchRoles = async () => {
   try {
     loading.value = true;
@@ -23,7 +24,7 @@ const fetchRoles = async () => {
     const data = await response.json();
     roles.value = data;
   } catch (error) {
-    console.error('Failed to fetch roles:', error);
+    toast.add({ severity: 'error', summary: 'Failed to fetch roles', detail: error.message, life: 3000 });
     roles.value = [];
   } finally {
     loading.value = false;
@@ -36,7 +37,7 @@ const openExternalLink = (url) => {
     try {
       window.open(url, '_blank', 'noopener,noreferrer');
     } catch (error) {
-      console.error('Failed to open external link:', error);
+      toast.add({ severity: 'error', summary: 'Failed to open external link', detail: error.message, life: 3000 });
       window.location.href = url;
     }
   }
@@ -48,6 +49,7 @@ const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
   } catch (error) {
+    toast.add({ severity: 'error', summary: 'Failed to format date', detail: error.message, life: 3000 });
     return dateString;
   }
 };
@@ -58,6 +60,7 @@ const isCurrentRole = (endDate) => {
     const end = new Date(endDate);
     return end >= new Date();
   } catch (error) {
+    toast.add({ severity: 'error', summary: 'Failed to determine if role is current', detail: error.message, life: 3000 });
     return false;
   }
 };

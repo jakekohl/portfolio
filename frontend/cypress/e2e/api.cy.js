@@ -27,7 +27,6 @@ describe('API Tests', () => {
   });
 
   context('Roles', () => {
-
     it('GET /roles should return a 200 status code and a list of roles', () => {
       cy.request('GET', `${apiUrl}/roles`).then((response) => {
         expect(response.status).to.eq(200);

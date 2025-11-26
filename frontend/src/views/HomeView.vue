@@ -2,9 +2,10 @@
 import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue';
 import GitHubHeatmap from '../components/GitHubHeatmap.vue';
+import { useToast } from 'primevue/usetoast';
 
+const toast = useToast();
 const router = useRouter();
-
 const me = ref(null);
 
 const testSkills = ref([
@@ -83,12 +84,16 @@ async function downloadResume() {
   const fileName = 'Resume_kohlJacob.pdf';
   const resumeUrl = '/Resume_kohlJacob.pdf';
 
-  const a = document.createElement('a');
-  a.href = resumeUrl;
-  a.download = fileName;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  try {
+    const a = document.createElement('a');
+    a.href = resumeUrl;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } catch (error) {
+    toast.add({ severity: 'error', summary: 'Failed to download resume', detail: error.message, life: 3000 });
+  }
 }
 
 async function getMe() {
@@ -97,7 +102,7 @@ async function getMe() {
     const data = await response.json();
     me.value = data;
   } catch (error) {
-    console.error('Error fetching me:', error);
+    toast.add({ severity: 'error', summary: 'Failed to fetch me', detail: error.message, life: 3000 });
   }
 }
 

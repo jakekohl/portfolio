@@ -11,7 +11,7 @@ describe('Roles', () => {
     'role-senior-infor',
     'role-services-infor',
     'role-qa-infor',
-    'role-support-microsoft'
+    'role-support-microsoft',
   ];
 
   it('should display the roles', () => {

@@ -1,8 +1,10 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import { useToast } from 'primevue/usetoast';
 
 const loading = ref(true);
 const projects = ref([]);
+const toast = useToast();
 
 const fetchProjects = async () => {
   try {
@@ -23,7 +25,7 @@ const fetchProjects = async () => {
       const data = await response.json();
       projects.value = data;
   } catch (error) {
-    console.error('Failed to fetch projects:', error);
+    toast.add({ severity: 'error', summary: 'Failed to fetch projects', detail: error.message, life: 3000 });
     projects.value = [];
   } finally {
     loading.value = false;
@@ -46,7 +48,7 @@ const openExternalLink = (url) => {
     try {
       window.open(url, '_blank', 'noopener,noreferrer');
     } catch (error) {
-      console.error('Failed to open external link:', error);
+      toast.add({ severity: 'error', summary: 'Failed to open external link', detail: error.message, life: 3000 });
       // Fallback: try to navigate in the same window
       window.location.href = url;
     }
