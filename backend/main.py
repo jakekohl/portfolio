@@ -1,13 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from items import health, me, projects, contact, github_stats
+from items import health, me, projects, contact, github_stats, roles
 from items.version import __version__
 from datetime import datetime
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+
 load_dotenv()
+
 app = FastAPI(
   title="Jake Kohl Portfolio",
   description="API for Jake Kohl's Software Engineering Portfolio",
@@ -43,6 +45,7 @@ if public_dir.exists():
 # Include routers
 app.include_router(health.router)
 app.include_router(me.router)
+app.include_router(roles.router)
 app.include_router(projects.router)
 app.include_router(contact.router)
 app.include_router(github_stats.router)
