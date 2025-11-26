@@ -16,6 +16,10 @@ const router = createRouter({
       component: () => import('@/views/Projects.vue'),
     },
     {
+      path: '/roles',
+      component: () => import('@/views/RolesView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       component: () => import('@/views/NotFound.vue'),
     },

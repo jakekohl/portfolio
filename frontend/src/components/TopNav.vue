@@ -15,6 +15,14 @@ const items = ref([
     }
   },
   {
+    label: 'Professional Experience',
+    icon: 'pi pi-building',
+    dataTest: 'nav-roles',
+    command: () => {
+      router.push('/roles');
+    }
+  },
+  {
     label: 'Projects',
     icon: 'pi pi-briefcase',
     dataTest: 'nav-projects',
@@ -50,7 +58,7 @@ const currentPath = computed(() => route.path);
 const isActiveRoute = (label) => {
   const routeMap = {
     'Home': '/',
-    'About': '/about',
+    'Professional Experience': '/roles',
     'Projects': '/projects',
     'Contact': '/contact'
   };
