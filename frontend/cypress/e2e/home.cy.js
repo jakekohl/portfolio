@@ -7,7 +7,7 @@ describe('Home Page', () => {
     const brandText = 'Jake Kohl';
     const menuItems = [
       { dataTest: 'nav-home', label: 'Home' },
-      { dataTest: 'nav-roles', label: 'Professional Experience' },
+      { dataTest: 'nav-roles', label: 'Career' },
       { dataTest: 'nav-projects', label: 'Projects' },
       { dataTest: 'nav-contact', label: 'Contact' },
     ];

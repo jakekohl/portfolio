@@ -15,7 +15,7 @@ const items = ref([
     }
   },
   {
-    label: 'Professional Experience',
+    label: 'Career',
     icon: 'pi pi-building',
     dataTest: 'nav-roles',
     command: () => {
