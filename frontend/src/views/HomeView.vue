@@ -8,74 +8,6 @@ const toast = useToast();
 const router = useRouter();
 const me = ref(null);
 
-const testSkills = ref([
-  { name: 'API'},
-  { name: 'End-to-End'},
-  { name: 'Integration'},
-  { name: 'Performance'},
-  { name: 'Cypress'},
-  { name: 'Playwright'},
-]);
-
-const supportSkills = ref([
-  { name: 'Technical Support'},
-  { name: 'Troubleshooting'},
-  { name: 'Log Analysis'},
-  { name: 'Infrastructure Management'},
-  { name: 'Database Management'},
-  { name: 'Technical Documentation'},
-  { name: 'Incident Management'},
-  { name: 'Escalation Management'},
-]);
-
-const devSkills = ref([
-  { name: 'Backend Development'},
-  { name: 'Debugging'},
-  { name: 'Requirements Review'},
-  { name: 'CI/CD'},
-  { name: 'Code Review'},
-  { name: 'ETL'},
-  { name: 'Vue.js'},
-  { name: 'Express.js'},
-  { name: 'JavaScript'},
-  { name: 'TypeScript'},
-  { name: 'Java'},
-  { name: 'Python'},
-  { name: 'Git'},
-  { name: 'GitHub'},
-]);
-
-const infrastructureSkills = ref([
-  { name: 'AWS'},
-  { name: 'ECS'},
-  { name: 'EC2'},
-  { name: 'Lambda'},
-  { name: 'S3'},
-  { name: 'RDS'},
-  { name: 'Cloudwatch'},
-  { name: 'Wildfly/Jboss'},
-  { name: 'RabbitMQ'},
-  { name: 'SQL Server'},
-  { name: 'MongoDB'},
-  { name: 'PostgreSQL'},
-  { name: 'SSAS'},
-  { name: 'SSRS'},
-  { name: 'Windows Server'}
-]);
-
-const softSkills = ref([
-  { name: 'Communication'},
-  { name: 'Collaboration'},
-  { name: 'Problem Solving'},
-  { name: 'Time Management'},
-  { name: 'Adaptability'},
-  { name: 'Leadership'},
-  { name: 'Training'},
-  { name: 'Project Management'},
-  { name: 'Training'},
-  { name: 'Team Management'},
-]);
-
 const navigateToSection = (route) => {
   router.push(route);
 };
@@ -187,95 +119,6 @@ onMounted(() => {
 
     <!-- GitHub Activity Section -->
     <GitHubHeatmap />
-
-    <!-- Skills Preview Section -->
-    <section class="skills-preview-section" data-test="skills-section">
-      <div class="content-wrapper">
-        <h3 class="section-title">Technical Expertise</h3>
-        <h4 class="skill-category">Development</h4>
-        <div class="skills-grid" data-test="skill-domain-development">
-          <div
-            v-for="skill in devSkills"
-            :key="skill.name"
-            class="skill-item"
-          >
-            <div class="skill-header">
-              <span class="skill-name">{{ skill.name }}</span>
-            </div>
-          </div>
-        </div>
-        <h4 class="skill-category">Testing</h4>
-        <div class="skills-grid" data-test="skill-domain-testing">
-          <div
-            v-for="skill in testSkills"
-            :key="skill.name"
-            class="skill-item"
-          >
-            <div class="skill-header">
-              <span class="skill-name">{{ skill.name }}</span>
-            </div>
-          </div>
-        </div>
-        <h4 class="skill-category">Infrastructure</h4>
-        <div class="skills-grid" data-test="skill-domain-infrastructure">
-          <div
-            v-for="skill in infrastructureSkills"
-            :key="skill.name"
-            class="skill-item"
-          >
-            <div class="skill-header">
-              <span class="skill-name">{{ skill.name }}</span>
-            </div>
-          </div>
-        </div>
-        <h4 class="skill-category">Support</h4>
-        <div class="skills-grid" data-test="skill-domain-support">
-          <div
-            v-for="skill in supportSkills"
-            :key="skill.name"
-            class="skill-item"
-          >
-            <div class="skill-header">
-              <span class="skill-name">{{ skill.name }}</span>
-            </div>
-          </div>
-        </div>
-        <h4 class="skill-category">Soft Skills</h4>
-        <div class="skills-grid" data-test="skill-domain-soft-skills">
-          <div
-            v-for="skill in softSkills"
-            :key="skill.name"
-            class="skill-item"
-          >
-            <div class="skill-header">
-              <span class="skill-name">{{ skill.name }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section" data-test="cta-section">
-      <div class="content-wrapper">
-        <PrimeCard class="cta-card">
-          <template #content>
-            <div class="cta-content">
-              <h3>Ready to Work Together?</h3>
-              <p>I'm always interested in new opportunities and exciting projects. Let's connect!</p>
-              <CustomButton
-                label="Get in Touch"
-                icon="pi pi-envelope"
-                size="large"
-                variant="gradient"
-                data-test="contact-cta-button"
-                @click="navigateToSection('/contact')"
-              />
-            </div>
-          </template>
-        </PrimeCard>
-      </div>
-    </section>
   </div>
 </template>
 
@@ -430,101 +273,12 @@ onMounted(() => {
   font-weight: var(--font-weight-medium);
 }
 
-/* Skills Preview Section */
-.skills-preview-section {
-  background: var(--color-background-primary);
-  padding: var(--spacing-16) 0;
-}
-
 .section-title {
   text-align: center;
   font-size: var(--font-size-5xl);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--spacing-12);
   color: var(--color-text-primary);
-}
-
-.skill-category {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-6);
-  margin-top: var(--spacing-8);
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-6);
-  margin-bottom: var(--spacing-12);
-}
-
-.skill-item {
-  background: var(--color-background-primary);
-  padding: var(--spacing-6);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-base);
-  transition: var(--transition-base);
-}
-
-.skill-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.skill-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--spacing-4);
-}
-
-.skill-name {
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-}
-
-.skill-percentage {
-  font-weight: var(--font-weight-semibold);
-  color: #f97316;
-}
-
-.skill-progress {
-  height: 0.5rem;
-}
-
-.skills-cta {
-  text-align: center;
-}
-
-/* CTA Section */
-.cta-section {
-  background: var(--gradient-hero-alt);
-  padding: var(--spacing-16) 0;
-}
-
-.cta-card {
-  max-width: 600px;
-  margin: 0 auto;
-  border: none;
-  box-shadow: var(--shadow-2xl);
-}
-
-.cta-content {
-  text-align: center;
-  padding: var(--spacing-8);
-}
-
-.cta-content h3 {
-  font-size: var(--font-size-4xl);
-  margin-bottom: var(--spacing-4);
-  color: var(--color-text-primary);
-}
-
-.cta-content p {
-  font-size: var(--font-size-xl);
-  color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-8);
 }
 
 /* Responsive Design */
@@ -571,17 +325,6 @@ onMounted(() => {
 
   .section-title {
     font-size: var(--font-size-4xl);
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-4);
-  }
-}
-
-@media (max-width: 1024px) and (min-width: 769px) {
-  .skills-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 </style>

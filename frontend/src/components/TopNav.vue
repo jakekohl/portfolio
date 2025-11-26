@@ -171,9 +171,9 @@ const isActiveRoute = (label) => {
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  margin: 0 0.5rem;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  margin: 0 0.25rem;
   border-radius: 0.75rem;
   transition: all 0.2s ease;
   color: #6b7280;

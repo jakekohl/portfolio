@@ -388,7 +388,7 @@ onMounted(() => {
 @import '../styles/design-tokens';
 
 .github-heatmap-section {
-  background: var(--color-background-primary);
+  background: var(--p-accent-blue-darker);
   padding: var(--spacing-16) 0;
   width: 100%;
 }
@@ -484,7 +484,7 @@ onMounted(() => {
 }
 
 .heatmap-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--p-background-color-secondary);
   border: none;
   box-shadow: var(--shadow-xl);
   width: 100%;
