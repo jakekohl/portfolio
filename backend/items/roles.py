@@ -14,6 +14,7 @@ class RoleResponse(BaseModel):
   endDate: str
   description: list[str]
   url: str
+  dataTest: str
 
 @router.get("/roles", response_model=list[RoleResponse])
 async def get_roles():
