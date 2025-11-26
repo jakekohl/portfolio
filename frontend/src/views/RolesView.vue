@@ -98,6 +98,9 @@ onMounted(() => {
             <template #header>
               <div class="role-header">
                 <div class="role-title-section">
+                  <div v-if="role.logo" class="role-logo-container">
+                    <img :src="role.logo" :alt="`${role.company} logo`" class="role-logo" data-test="role-logo" />
+                  </div>
                   <h3 class="role-title" data-test="role-title">{{ role.title }}</h3>
                   <h4 class="role-company" data-test="role-company">{{ role.company }}</h4>
                 </div>
@@ -234,6 +237,19 @@ onMounted(() => {
 
 .role-title-section {
   flex: 1;
+}
+
+.role-logo-container {
+  margin-bottom: var(--spacing-4);
+}
+
+.role-logo {
+  max-width: 120px;
+  max-height: 60px;
+  object-fit: contain;
+  border-radius: var(--border-radius-md);
+  background: rgba(255, 255, 255, 0.5);
+  padding: var(--spacing-2);
 }
 
 .role-title {

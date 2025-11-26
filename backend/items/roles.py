@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 from lib.roles_service import RolesService
 from bson import ObjectId
+from typing import Optional
 
 router = APIRouter(tags=["roles"])
 
@@ -9,6 +10,7 @@ class RoleResponse(BaseModel):
   _id: ObjectId
   title: str
   company: str
+  logo: Optional[str]
   location: str
   startDate: str
   endDate: str
