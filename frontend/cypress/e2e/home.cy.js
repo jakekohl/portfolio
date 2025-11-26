@@ -7,6 +7,7 @@ describe('Home Page', () => {
     const brandText = 'Jake Kohl';
     const menuItems = [
       { dataTest: 'nav-home', label: 'Home' },
+      { dataTest: 'nav-roles', label: 'Professional Experience' },
       { dataTest: 'nav-projects', label: 'Projects' },
       { dataTest: 'nav-contact', label: 'Contact' },
     ];
@@ -14,7 +15,7 @@ describe('Home Page', () => {
       { dataTest: 'social-github', link: 'https://github.com/jakekohl' },
       { dataTest: 'social-linkedin', link: 'https://linkedin.com/in/jacob-jp-kohl' },
     ];
-    const sections = ['hero-section', 'stats-section', 'skills-section', 'cta-section'];
+    const sections = ['hero-section', 'stats-section'];
 
     cy.verifyTopNavMenubar(brandText, menuItems, socialLinks);
     sections.forEach((section) => {
@@ -49,7 +50,6 @@ describe('Home Page', () => {
     const stats = [
       {
         dataTest: 'stat-quality-assurance',
-        value: 5,
         label: 'Quality Assurance',
       },
       {
@@ -80,14 +80,6 @@ describe('Home Page', () => {
     });
   });
 
-  it('should showcase the user\'s technical skills in high level categories', () => {
-    const categories = ['development', 'testing', 'infrastructure', 'support', 'soft-skills'];
-
-    categories.forEach((category) => {
-      cy.getDataTest(`skill-domain-${category}`).should('be.visible');
-    });
-  });
-
   it('should showcase the user\'s github activity', () => {
     cy.getDataTest('github-heatmap-section').should('be.visible').within(() => {
       cy.intercept('GET', '/github-stats?year=2024').as('githubStats');
@@ -102,10 +94,8 @@ describe('Home Page', () => {
     });
   });
 
-  it('should show a call-to-action featuring a button link for connecting with the user', () => {
-    cy.getDataTest('cta-section').should('be.visible').within(() => {
-      cy.clickDataTest('contact-cta-button');
-      cy.url().should('include', '/contact');
-    });
+  it('should display the site footer', () => {
+    cy.getDataTest('footer-text').should('be.visible').and('contain', 'This site is continuously being improved and updated. New features and enhancements are regularly being worked on.');
+    cy.getDataTest('footer-copyright').should('be.visible').and('contain', `© ${new Date().getFullYear()} Jake Kohl. Built with Vue.js and PrimeVue.`);
   });
 });

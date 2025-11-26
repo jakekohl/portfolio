@@ -1,5 +1,6 @@
 <script setup>
 import TopNav from './components/TopNav.vue';
+import SiteFooter from './components/SiteFooter.vue';
 import Toast from 'primevue/toast';
 </script>
 
@@ -9,6 +10,7 @@ import Toast from 'primevue/toast';
     <main>
       <RouterView />
     </main>
+    <SiteFooter />
     <Toast position="bottom-right" />
   </div>
 </template>
@@ -26,10 +28,13 @@ body {
 
 #app {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
   padding-top: 80px; /* Account for fixed navigation height */
+  flex: 1;
 }
 
 </style>
