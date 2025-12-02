@@ -5,9 +5,11 @@ from lib.me_service import MeService
 router = APIRouter(tags=["me"])
 
 class MeResponse(BaseModel):
-  _id: str
   name: str
   experiences: list[dict]
+  title: str
+  avatarUrl: str
+  skills: dict
 
 @router.get("/me", response_model=MeResponse)
 async def get_me():
@@ -19,9 +21,19 @@ async def get_me():
         detail="Profile data not found"
       )
     return MeResponse(
-      _id=me_data.get("_id", ""),
       name=me_data.get("name", ""),
       experiences=me_data.get("experiences", []),
+      title=me_data.get("title", ""),
+      avatarUrl=me_data.get("avatarUrl", ""),
+      skills=me_data.get("skills", {
+        "languages": [],
+        "frameworks": [],
+        "systems": [],
+        "databases": [],
+        "tools": [],
+        "soft_skills": [],
+        "other": [],
+      }),
     )
   except HTTPException:
     raise
