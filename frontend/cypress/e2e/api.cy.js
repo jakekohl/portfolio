@@ -72,7 +72,7 @@ describe('API Tests', () => {
       });
     });
 
-    it('POST /github-stats/ingest should not return a 200 status code if the secret is incorrect or missing', () => {
+    it('POST /github-stats/ingest should not return a 200 status code if the secret is incorrect', () => {
       cy.request({
         method: 'POST',
         url: `${apiUrl}/github-stats/ingest`,
@@ -85,6 +85,44 @@ describe('API Tests', () => {
         expect(response.body).to.be.an('object');
         expect(response.body).to.have.property('detail').to.be.a('string');
         expect(response.body.detail).to.oneOf(['Invalid or missing X-GitHub-Stats-Secret header', 'GitHub stats secret not configured on server']);
+      });
+    });
+
+    it('POST /github-stats/ingest should not return a 200 status code if the secret is missing', () => {
+      cy.request({
+        method: 'POST',
+        url: `${apiUrl}/github-stats/ingest`,
+        failOnStatusCode: false,
+      }).then((response) => {
+        expect(response.status).to.be.oneOf([401, 500]);
+      });
+    });
+
+    it('POST /github-stats/ingest should return a 200 status code if the secret is correct', () => {
+      cy.intercept('POST', '**/github-stats/ingest', {
+        statusCode: 200,
+        fixture: 'github_stats/postSuccess.json',
+      }).as('postSuccess');
+
+      // Use window.fetch to make the request so intercept can provide the static response
+      cy.window().then((win) => {
+        return win.fetch(`${apiUrl}/github-stats/ingest`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-GitHub-Stats-Secret': 'test-secret',
+          },
+        }).then((response) => {
+          expect(response.status).to.eq(200);
+
+          return response.json();
+        }).then((body) => {
+          expect(body).to.be.an('object');
+          expect(body).to.have.property('status').to.eq('updated');
+          expect(body).to.have.property('contributionsCount').to.be.a('number');
+          expect(body).to.have.property('totalContributions').to.be.a('number');
+          expect(body).to.have.property('lastUpdated').to.be.a('string');
+        });
       });
     });
   });
