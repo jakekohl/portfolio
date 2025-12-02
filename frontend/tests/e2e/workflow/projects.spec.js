@@ -1,8 +1,6 @@
 import { test } from '@playwright/test';
 import { verifyProjects } from '../../support/projects';
 
-test.use({ baseURL: 'https://www.jakekohl.dev' });
-
 test.describe('Projects Page', () => {
   const ongoingProjects = [];
   const completedProjects = [];
@@ -11,7 +9,6 @@ test.describe('Projects Page', () => {
     const projectsPromise = page.waitForResponse(async (response) => {
       return response.url().includes('/projects') && response.status() === 200;
     });
-
 
     await page.goto('/');
     await page.getByTestId('nav-projects').click();

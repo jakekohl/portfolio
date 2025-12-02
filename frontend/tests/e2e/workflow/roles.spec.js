@@ -1,8 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { verifyRoles } from '../../support/roles';
 
-test.use({ baseURL: 'http://localhost:5173' });
-
 const roles = [];
 
 test.describe('Roles Page', () => {
@@ -21,7 +19,6 @@ test.describe('Roles Page', () => {
   });
 
   test('should display the roles page', async ({ page }) => {
-    console.log(roles);
     await expect(page.getByTestId('roles-grid')).toBeVisible();
     await verifyRoles(page, roles);
   });

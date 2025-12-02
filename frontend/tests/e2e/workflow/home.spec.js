@@ -1,8 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { verifyTopNavMenubar, verifySectionVisibility, verifyProfessionalStats, verifyGitHubHeatmap, selectGitHubYear } from '../../support/home';
 
-test.use({ baseURL: 'https://www.jakekohl.dev' });
-
 const brandText = 'Jake Kohl';
 const menuItems = [
   { dataTest: 'nav-home', label: 'Home' },
