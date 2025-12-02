@@ -81,8 +81,9 @@ describe('Home Page', () => {
   });
 
   it('should showcase the user\'s github activity', () => {
+    cy.intercept('GET', '/github-stats?year=2024').as('githubStats');
+
     cy.getDataTest('github-heatmap-section').should('be.visible').within(() => {
-      cy.intercept('GET', '/github-stats?year=2024').as('githubStats');
       cy.contains('GitHub Activity').should('be.visible');
       cy.getDataTest('github-activity-link').should('be.visible').and('have.attr', 'href', 'https://github.com/jakekohl');
       cy.verifyGitHubHeatmap();
