@@ -1,68 +1,28 @@
 describe('Projects', () => {
+  const ongoingProjects = [];
+  const completedProjects = [];
+
   beforeEach(() => {
+    cy.intercept('GET', '**/projects').as('getProjects');
+
     cy.visit('/');
     cy.clickDataTest('nav-projects');
     cy.url().should('include', '/projects');
+    cy.wait('@getProjects').then((getProjectsResponse) => {
+      ongoingProjects.push(...getProjectsResponse.response.body.filter((project) => project.status === 'In Development'));
+      completedProjects.push(...getProjectsResponse.response.body.filter((project) => project.status === 'Completed'));
+    });
   });
 
-  it('should show a list of current projects', () => {
-    const currentProjects = [
-      {
-        title: 'Personal Portfolio Website',
-        status: 'In Development',
-        images: [
-          'portfolio1.png',
-          'portfolio2.png',
-          'portfolio3.png',
-        ],
-        dataTest: 'project-portfolio',
-        githubButton: true,
-        demoButton: true,
-      },
-      {
-        title: 'Stride Builder',
-        status: 'In Development',
-        images: [
-          'sb1.png',
-          'sb2.png',
-        ],
-        dataTest: 'project-stride-builder',
-        githubButton: true,
-        demoButton: true,
-      },
-      {
-        title: 'Calculator',
-        status: 'In Development',
-        images: [],
-        dataTest: 'project-calculator',
-        githubButton: true,
-        demoButton: false,
-      },
-    ];
-
+  it('should show a list of ongoing projects', () => {
     cy.getDataTest('ongoing-projects').should('be.visible').within(() => {
-      currentProjects.forEach((project) => {
+      ongoingProjects.forEach((project) => {
         cy.validateProjectCard(project);
       });
     });
   });
 
   it('should show a list of completed projects', () => {
-    const completedProjects = [
-      {
-        dataTest: 'project-nurtured-heart-ai',
-        title: 'Nurtured Heart AI',
-        status: 'Completed',
-        images: [
-          'nha1.png',
-          'nha2.png',
-          'nha3.png',
-        ],
-        githubButton: true,
-        demoButton: true,
-      },
-    ];
-
     cy.getDataTest('completed-projects').should('be.visible').within(() => {
       completedProjects.forEach((project) => {
         cy.validateProjectCard(project);
