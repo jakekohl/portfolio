@@ -9,13 +9,13 @@ import { expect } from '@playwright/test';
  * @param {string} specialty.description - The description of the specialty
  */
 export async function verifySpecialties(page, specialties) {
-  specialties.forEach(async (specialty) => {
+  for (const specialty of specialties) {
     await expect(page.getByTestId(specialty.dataTest)).toBeVisible();
     await expect(page.getByTestId(specialty.dataTest).getByTestId('specialty-title')).toBeVisible();
     await expect(page.getByTestId(specialty.dataTest).getByTestId('specialty-title')).toContainText(specialty.title);
     await expect(page.getByTestId(specialty.dataTest).getByTestId('specialty-description')).toBeVisible();
     await expect(page.getByTestId(specialty.dataTest).getByTestId('specialty-description')).toContainText(specialty.description);
-  });
+  }
 }
 
 /**
@@ -29,7 +29,7 @@ export async function verifySpecialties(page, specialties) {
  */
 export async function verifyContactMethods(page, contactMethods) {
   page.context().grantPermissions(['clipboard-read']);
-  contactMethods.forEach(async (contactMethod) => {
+  for (const contactMethod of contactMethods) {
     await expect(page.getByTestId(contactMethod.dataTest)).toBeVisible();
     await expect(page.getByTestId(contactMethod.dataTest).getByTestId('contact-type')).toBeVisible();
     await expect(page.getByTestId(contactMethod.dataTest).getByTestId('contact-type')).toContainText(contactMethod.type);
@@ -40,5 +40,5 @@ export async function verifyContactMethods(page, contactMethods) {
     await expect(page.getByTestId(contactMethod.dataTest).getByTestId('contact-copy')).toBeVisible();
     await expect(page.getByTestId(contactMethod.dataTest).getByTestId('contact-copy')).toBeEnabled();
     // Implement copy contact information to clipboard validation logic here
-  });
+  }
 }

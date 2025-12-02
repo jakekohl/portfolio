@@ -16,26 +16,29 @@ const sections = ['hero-section', 'stats-section'];
 
 test.describe('Home Page', () => {
   test.beforeEach(async ({ page }) => {
-    const mePromise = page.waitForResponse(async (response) => {
-      return response.url().includes('/me') && response.status() === 200;
-    });
+    const mePromise = page.waitForResponse(
+      async (response) => {
+        return response.url().includes('/me') && response.status() === 200;
+      },
+      { timeout: 30000 },
+    );
 
-    const githubStatsPromise = page.waitForResponse(async (response) => {
-      return response.url().includes('/github-stats') && response.status() === 200;
-    });
+    const githubStatsPromise = page.waitForResponse(
+      async (response) => {
+        return response.url().includes('/github-stats') && response.status() === 200;
+      },
+      { timeout: 30000 },
+    );
 
-    await page.goto('/');
-    // eslint-disable-next-line no-unused-vars
-    const meResponse = await mePromise;
-    // eslint-disable-next-line no-unused-vars
-    const githubStatsResponse = await githubStatsPromise;
+    await page.goto('/', { waitUntil: 'networkidle' });
+    await Promise.all([mePromise, githubStatsPromise]);
   });
 
   test('should display the home page with the Top Navigation Menubar', async ({ page }) => {
     await verifyTopNavMenubar(page, brandText, menuItems, socialLinks);
-    sections.forEach(async (section) => {
+    for (const section of sections) {
       await verifySectionVisibility(page, section);
-    });
+    }
   });
 
   test('should inform the user whose portfolio they are looking at', async ({ page }) => {
@@ -91,9 +94,12 @@ test.describe('Home Page', () => {
   });
 
   test('should showcase the user\'s github activity', async ({ page }) => {
-    const githubStatsPromise = page.waitForResponse(async (response) => {
-      return response.url().includes('/github-stats') && response.status() === 200;
-    });
+    const githubStatsPromise = page.waitForResponse(
+      async (response) => {
+        return response.url().includes('/github-stats') && response.status() === 200;
+      },
+      { timeout: 30000 },
+    );
 
     const githubHeatmapSection = page.getByTestId('github-heatmap-section');
     const githubActivityLink = githubHeatmapSection.getByTestId('github-activity-link');

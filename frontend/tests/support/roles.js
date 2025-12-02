@@ -18,7 +18,7 @@ export const formatDate = (dateString) => {
  * @param {string[]} roles - The roles to verify
  */
 export async function verifyRoles(page, roles) {
-  roles.forEach(async (role) => {
+  for (const role of roles) {
     await expect(page.getByTestId(role.dataTest)).toBeVisible();
     await expect(page.getByTestId(role.dataTest).getByTestId('role-title')).toBeVisible();
     await expect(page.getByTestId(role.dataTest).getByTestId('role-title')).toContainText(role.title);
@@ -31,10 +31,10 @@ export async function verifyRoles(page, roles) {
     await expect(page.getByTestId(role.dataTest).getByTestId('role-dates')).toBeVisible();
     await expect(page.getByTestId(role.dataTest).getByTestId('role-dates')).toContainText(`${formatDate(role.startDate)} - ${formatDate(role.endDate)}`);
     await expect(page.getByTestId(role.dataTest).getByTestId('role-description')).toBeVisible();
-    role.description.forEach(async (description) => {
+    for (const description of role.description) {
       await expect(page.getByTestId(role.dataTest).getByTestId('role-description')).toContainText(description);
-    });
+    }
     await expect(page.getByTestId(role.dataTest).getByTestId('role-url-button')).toBeVisible();
     await expect(page.getByTestId(role.dataTest).getByTestId('role-url-button')).toBeEnabled();
-  });
+  }
 }

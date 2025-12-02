@@ -1,17 +1,28 @@
 import { test, expect } from '@playwright/test';
 import { verifySpecialties, verifyContactMethods } from '../../support/contact';
 
-const specialties = [];
-const contactMethods = [];
-
 test.describe('Contact Page', () => {
-  test.beforeEach(async ({ page }) => {
-    const contactPromise = page.waitForResponse(async (response) => {
-      return response.url().includes('/contact') && response.status() === 200;
-    });
+  let specialties = [];
+  let contactMethods = [];
 
-    await page.goto('/');
+  test.beforeEach(async ({ page }) => {
+    specialties = [];
+    contactMethods = [];
+
+    await page.goto('/', { waitUntil: 'networkidle' });
+
+    await page.getByTestId('nav-contact').waitFor({ state: 'visible' });
+
+    const contactPromise = page.waitForResponse(
+      async (response) => {
+        return response.url().includes('/contact') && response.status() === 200;
+      },
+      { timeout: 30000 },
+    );
+
     await page.getByTestId('nav-contact').click();
+
+    await page.waitForURL('**/contact', { waitUntil: 'networkidle' });
 
     const contactResponse = await contactPromise;
     const contactResponseBody = await contactResponse.json();

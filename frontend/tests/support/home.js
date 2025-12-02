@@ -10,12 +10,12 @@ import { expect } from '@playwright/test';
 export async function verifyTopNavMenubar(page, brandText, menuItems, socialLinks) {
   await expect(page.getByTestId('nav-top-menubar')).toBeVisible();
   await expect(page.getByTestId('brand-slot')).toHaveText(brandText);
-  menuItems.forEach(async ({ dataTest, label }) => {
+  for (const { dataTest, label } of menuItems) {
     await expect(page.getByTestId(dataTest)).toHaveText(label);
-  });
-  socialLinks.forEach(async ({ dataTest, link }) => {
+  }
+  for (const { dataTest, link } of socialLinks) {
     await expect(page.getByTestId(dataTest)).toHaveAttribute('href', link);
-  });
+  }
 }
 
 /**
@@ -36,10 +36,10 @@ export async function verifySectionVisibility(page, sectionSelector) {
  * @param {string} stat.label - The label for the stat
  */
 export async function verifyProfessionalStats(statsSection, stats) {
-  stats.forEach(async (stat) => {
+  for (const stat of stats) {
     await expect(statsSection.getByTestId(stat.dataTest)).toBeVisible();
     await expect(statsSection.getByTestId(stat.dataTest)).toContainText(stat.label);
-  });
+  }
 }
 
 /**
