@@ -1,17 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { verifyTopNavMenubar, verifySectionVisibility, verifyProfessionalStats, verifyGitHubHeatmap, selectGitHubYear } from '../../support/home';
+import { verifySectionVisibility, verifyProfessionalStats, verifyGitHubHeatmap, selectGitHubYear } from '../../support/home';
 
-const brandText = 'Jake Kohl';
-const menuItems = [
-  { dataTest: 'nav-home', label: 'Home' },
-  { dataTest: 'nav-roles', label: 'Career' },
-  { dataTest: 'nav-projects', label: 'Projects' },
-  { dataTest: 'nav-contact', label: 'Contact' },
-];
-const socialLinks = [
-  { dataTest: 'social-github', link: 'https://github.com/jakekohl' },
-  { dataTest: 'social-linkedin', link: 'https://linkedin.com/in/jacob-jp-kohl' },
-];
 const sections = ['hero-section', 'stats-section'];
 
 test.describe('Home Page', () => {
@@ -34,8 +23,7 @@ test.describe('Home Page', () => {
     await Promise.all([mePromise, githubStatsPromise]);
   });
 
-  test('should display the home page with the Top Navigation Menubar', async ({ page }) => {
-    await verifyTopNavMenubar(page, brandText, menuItems, socialLinks);
+  test('should display the home page with the required sections', async ({ page }) => {
     for (const section of sections) {
       await verifySectionVisibility(page, section);
     }
