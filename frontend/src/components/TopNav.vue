@@ -58,7 +58,7 @@ const currentPath = computed(() => route.path);
 const isActiveRoute = (label) => {
   const routeMap = {
     'Home': '/',
-    'Professional Experience': '/roles',
+    'Career': '/roles',
     'Projects': '/projects',
     'Contact': '/contact'
   };
