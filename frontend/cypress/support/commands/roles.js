@@ -9,6 +9,7 @@ const formatDate = (dateString) => {
     const date = new Date(dateString);
 
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+    // eslint-disable-next-line no-unused-vars
   } catch (error) {
     return dateString;
   }
