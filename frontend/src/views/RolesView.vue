@@ -93,7 +93,7 @@ onMounted(() => {
             v-for="role in roles"
             :key="role.dataTest"
             class="role-card"
-            :data-test="`role-${role.dataTest}`"
+            :data-test="role.dataTest"
           >
             <template #header>
               <div class="role-header">

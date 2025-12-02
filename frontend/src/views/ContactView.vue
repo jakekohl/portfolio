@@ -100,7 +100,7 @@ onMounted(() => {
                     <i :class="specialty.icon" class="text-primary"></i>
                   </div>
                   <h3 class="specialty-title" data-test="specialty-title">{{ specialty.title }}</h3>
-                  <p class="specialty-description">{{ specialty.description }}</p>
+                  <p class="specialty-description" data-test="specialty-description">{{ specialty.description }}</p>
                 </div>
               </template>
             </PrimeCard>
