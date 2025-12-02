@@ -11,7 +11,7 @@ export default defineConfig([
     files: ['**/*.{js,mjs,jsx,vue}'],
   },
 
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**', 'playwright-report/**', 'blob-report/**', 'test-results/**']),
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**', 'playwright-report/**', 'blob-report/**', 'test-results/**', '**/.env*']),
 
   // Base configuration for all files
   {
