@@ -1,5 +1,5 @@
 describe('API Tests', () => {
-  const apiUrl = Cypress.env('API_URL') || 'http://localhost:8000';
+  const apiUrl = Cypress.env('VITE_API_URL') || 'https://portfolio.jakekohl.dev';
 
   context('Health', () => {
     it('GET /health should return a 200 status code and a message indicating the API is running', () => {

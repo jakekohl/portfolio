@@ -26,6 +26,6 @@ export default defineConfig({
     },
   },
   env: {
-    API_URL: process.env.VITE_API_URL || 'https://portfolio.jakekohl.dev',
+    VITE_API_URL: process.env.VITE_API_URL || 'https://portfolio.jakekohl.dev',
   },
 });
