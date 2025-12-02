@@ -123,6 +123,7 @@ const toggleSidebar = () => {
       v-model:visible="sidebarVisible" 
       position="left"
       class="mobile-sidebar"
+      data-test="mobile-sidebar"
     >
       <template #header>
         <div class="sidebar-header">

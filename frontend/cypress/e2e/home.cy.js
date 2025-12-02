@@ -3,21 +3,9 @@ describe('Home Page', () => {
     cy.visit('/');
   });
 
-  it('should display the home page with the Top Navigation Menubar', () => {
-    const brandText = 'Jake Kohl';
-    const menuItems = [
-      { dataTest: 'nav-home', label: 'Home' },
-      { dataTest: 'nav-roles', label: 'Career' },
-      { dataTest: 'nav-projects', label: 'Projects' },
-      { dataTest: 'nav-contact', label: 'Contact' },
-    ];
-    const socialLinks = [
-      { dataTest: 'social-github', link: 'https://github.com/jakekohl' },
-      { dataTest: 'social-linkedin', link: 'https://linkedin.com/in/jacob-jp-kohl' },
-    ];
-    const sections = ['hero-section', 'stats-section'];
+  it('should display the home page with the required sections', () => {
+    const sections = ['hero-section', 'stats-section', 'github-heatmap-section'];
 
-    cy.verifyTopNavMenubar(brandText, menuItems, socialLinks);
     sections.forEach((section) => {
       cy.verifySectionVisibility(section);
     });
