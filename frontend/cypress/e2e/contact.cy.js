@@ -1,13 +1,13 @@
 describe('Contact Page', () => {
+  const apiUrl = Cypress.env('VITE_API_URL') || 'https://portfolio.jakekohl.dev';
+
   const specialties = [];
   const contactMethods = [];
 
   beforeEach(() => {
-    cy.intercept('GET', '**/contact').as('getContact');
+    cy.intercept('GET', `${apiUrl}/contact`).as('getContact');
 
-    cy.visit('/');
-    cy.clickDataTest('nav-contact');
-    cy.url().should('include', '/contact');
+    cy.visit(`${Cypress.config('baseUrl')}/contact`);
     cy.wait('@getContact').then((getContactResponse) => {
       specialties.push(...getContactResponse.response.body.specialties);
       contactMethods.push(...getContactResponse.response.body.contact);

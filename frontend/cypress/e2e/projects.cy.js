@@ -1,13 +1,13 @@
 describe('Projects', () => {
+  const apiUrl = Cypress.env('VITE_API_URL') || 'https://portfolio.jakekohl.dev';
+
   const ongoingProjects = [];
   const completedProjects = [];
 
   beforeEach(() => {
-    cy.intercept('GET', '**/projects').as('getProjects');
+    cy.intercept('GET', `${apiUrl}/projects`).as('getProjects');
 
-    cy.visit('/');
-    cy.clickDataTest('nav-projects');
-    cy.url().should('include', '/projects');
+    cy.visit(`${Cypress.config('baseUrl')}/projects`);
     cy.wait('@getProjects').then((getProjectsResponse) => {
       ongoingProjects.push(...getProjectsResponse.response.body.filter((project) => project.status === 'In Development'));
       completedProjects.push(...getProjectsResponse.response.body.filter((project) => project.status === 'Completed'));
