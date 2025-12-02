@@ -12,7 +12,7 @@ The Backend is a quick python based API Server (FastAPI) that grabs appropriate 
 
 ## Frontend
 
-The Frontend is a JavaScript based project (VueJS) that also contains Cypress (and eventually Playwright) Testing
+The Frontend is a JavaScript based project (VueJS) that also contains Cypress and Playwright Testing
 
 ## Getting Started
 

@@ -21,12 +21,16 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:ci": "npm run dev && cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }}",
+    "pw:open": "playwright test --ui",
+    "pw:run": "playwright test",
     "lint": "eslint . --fix",
     "lint:nibble": "eslint-nibble .",
     "lint:ci": "eslint ."
   },
   "dependencies": {
     "@primeuix/themes": "^1.2.3",
+    "dotenv": "^17.2.3",
+    "path": "^0.12.7",
     "primeicons": "^7.0.0",
     "primevue": "^4.3.9",
     "vue": "^3.5.18",
@@ -34,6 +38,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.1",
     "@vitejs/plugin-vue": "^6.0.1",
     "cypress": "^15.6.0",
     "eslint": "^9.31.0",
@@ -42,6 +48,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vue": "~10.3.0",
     "globals": "^16.3.0",
+    "playwright": "^1.57.0",
     "sass-embedded": "^1.93.0",
     "start-server-and-test": "^2.0.12",
     "vite": "^7.0.6",

@@ -15,7 +15,7 @@ npm i
 
 The frontend does leverage backend API calls to load data, so you will need to also get that running as well.
 
-## Cypress & Playwright
+## Cypress
 
 ### Current Test Results
 Cypress Cloud Results can be found here, where you can see history of runs through local development and from the CI/CD Pipeline
@@ -36,5 +36,23 @@ npx cypress open # Open Mode
 npx cypress open --config baseUrl=http://localhost:5173 --env API_URL=http://localhost:8000
 ```
 
+## Playwright
+
+### Current Playwright Test Results
+
+`Coming SoonTM`
+
 ### Running Playwright Test Automations
-`Coming Soon`
+
+You can also run Playwright Tests against the deployed site (`https://www.jakekohl.dev`) or locally. Below are step-by-step instructions.
+
+```
+# Run Playwright locally against the deployed site
+npx playwright test # Run Mode
+npx playwright test --ui # Open Mode
+
+# set up the .env file using the .env example for local execution
+cp .env.example .env
+npxnpx playwright test # Run Mode
+npx playwright test --ui # Open Mode
+```

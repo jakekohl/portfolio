@@ -1,18 +1,16 @@
 describe('Roles', () => {
+  const roles = [];
+
   beforeEach(() => {
+    cy.intercept('GET', '**/roles').as('getRoles');
+
     cy.visit('/');
     cy.clickDataTest('nav-roles');
     cy.url().should('include', '/roles');
+    cy.wait('@getRoles').then((getRolesResponse) => {
+      roles.push(...getRolesResponse.response.body);
+    });
   });
-
-  const roles = [
-    'role-qa-tagboard',
-    'role-manager-infor',
-    'role-senior-infor',
-    'role-services-infor',
-    'role-qa-infor',
-    'role-support-microsoft',
-  ];
 
   it('should display the roles', () => {
     cy.getDataTest('roles-grid').should('be.visible');

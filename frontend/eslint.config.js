@@ -11,7 +11,7 @@ export default defineConfig([
     files: ['**/*.{js,mjs,jsx,vue}'],
   },
 
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**', 'playwright-report/**', 'blob-report/**', 'test-results/**']),
 
   // Base configuration for all files
   {
@@ -55,8 +55,12 @@ export default defineConfig([
           '**/*.cy.js',
           'cypress/**/*',
           'cypress.config.js',
+          'playwright.config.js',
           '**/vite.config.js',
           '**/eslint.config.js',
+          '**/tests/**/*',
+          '**/tests/support/**/*',
+          '**/tests/e2e/**/*',
         ],
       }],
     },
