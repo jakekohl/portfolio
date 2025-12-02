@@ -55,6 +55,7 @@ export default defineConfig([
           '**/*.cy.js',
           'cypress/**/*',
           'cypress.config.js',
+          'playwright.config.js',
           '**/vite.config.js',
           '**/eslint.config.js',
           '**/tests/**/*',
