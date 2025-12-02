@@ -12,6 +12,7 @@ import ProgressBar from 'primevue/progressbar';
 import ProgressSpinner from 'primevue/progressspinner';
 import Dialog from 'primevue/dialog';
 import Dropdown from 'primevue/dropdown';
+import Sidebar from 'primevue/sidebar';
 import Tooltip from 'primevue/tooltip';
 import CustomButton from '../components/CustomButton.vue';
 
@@ -74,6 +75,7 @@ export default {
     app.component('PrimeProgressSpinner', ProgressSpinner);
     app.component('PrimeDialog', Dialog);
     app.component('PrimeDropdown', Dropdown);
+    app.component('PrimeSidebar', Sidebar);
 
     // Register tooltip directive globally
     app.directive('tooltip', Tooltip);
