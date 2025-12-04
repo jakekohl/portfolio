@@ -13,3 +13,10 @@ class ProjectsService:
     except (ServerSelectionTimeoutError, ConnectionFailure, PyMongoError) as e:
       print(f"MongoDB connection error in get_projects: {str(e)}")
       return []
+
+  def get_entities(self) -> list[str]:
+    try:
+      return [entity for entity in self.collection.distinct("entity")]
+    except (ServerSelectionTimeoutError, ConnectionFailure, PyMongoError) as e:
+      print(f"MongoDB connection error in get_entities: {str(e)}")
+      return []
