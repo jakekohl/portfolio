@@ -5,26 +5,54 @@ import ProjectCard from '../components/ProjectCard.vue';
 
 const loading = ref(true);
 const projects = ref([]);
+const entities = ref([]);
 const toast = useToast();
+
+// Separate filter variables for completed and ongoing projects (null = "All")
+const completedEntityFilter = ref(null);
+const ongoingEntityFilter = ref(null);
+
+const fetchEntities = async () => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/projects/entities`,
+      {
+        method: 'GET',
+        headers: {
+          'Origin': import.meta.env.VITE_APP_URL,
+          'Referrer': import.meta.env.VITE_APP_URL,
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    entities.value = data.entities || [];
+  } catch (error) {
+    toast.add({ severity: 'error', summary: 'Failed to fetch entities', detail: error.message, life: 3000 });
+    entities.value = [];
+  }
+};
 
 const fetchProjects = async () => {
   try {
     loading.value = true;
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/projects`,
-        {
-          method: 'GET',
-          headers: {
-            'Origin': import.meta.env.VITE_APP_URL,
-            'Referrer': import.meta.env.VITE_APP_URL,
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/projects`,
+      {
+        method: 'GET',
+        headers: {
+          'Origin': import.meta.env.VITE_APP_URL,
+          'Referrer': import.meta.env.VITE_APP_URL,
+        },
       }
-      const data = await response.json();
-      projects.value = data;
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    projects.value = data;
   } catch (error) {
     toast.add({ severity: 'error', summary: 'Failed to fetch projects', detail: error.message, life: 3000 });
     projects.value = [];
@@ -33,15 +61,42 @@ const fetchProjects = async () => {
   }
 };
 
-onMounted(() => {
-  fetchProjects();
+onMounted(async () => {
+  await fetchEntities();
+  await fetchProjects();
 });
 
-const ongoingProjects = computed(() => projects.value.filter(project => project.status === 'In Development') || []);
-const completedProjects = computed(() => projects.value.filter(project => project.status === 'Completed') || []);
+// Filter projects by status and entity separately
+const ongoingProjects = computed(() => {
+  let filtered = projects.value.filter(project => project.status === 'In Development') || [];
+  if (ongoingEntityFilter.value) {
+    filtered = filtered.filter(project => project.entity === ongoingEntityFilter.value);
+  }
+  return filtered;
+});
+
+const completedProjects = computed(() => {
+  let filtered = projects.value.filter(project => project.status === 'Completed') || [];
+  if (completedEntityFilter.value) {
+    filtered = filtered.filter(project => project.entity === completedEntityFilter.value);
+  }
+  return filtered;
+});
 
 const hasOngoingProjects = computed(() => ongoingProjects.value.length > 0);
 const hasCompletedProjects = computed(() => completedProjects.value.length > 0);
+
+// Dropdown options for both filters (with "All" as default)
+const entityOptions = computed(() => {
+  const options = [{ label: 'All', value: null }];
+  entities.value
+    .filter(entity => entity) // Filter out null/undefined entities
+    .sort()
+    .forEach(entity => {
+      options.push({ label: entity, value: entity });
+    });
+  return options;
+});
 
 // Methods for handling external navigation
 const openExternalLink = (url) => {
@@ -115,6 +170,19 @@ const closeImageDialog = () => {
             Completed Projects
           </h2>
           <p class="section-subtitle">Finished projects and accomplishments</p>
+          <div v-if="entityOptions.length > 1" class="filter-container">
+            <label for="completed-entity-filter" class="filter-label">Filter by Team:</label>
+            <PrimeDropdown
+              id="completed-entity-filter"
+              v-model="completedEntityFilter"
+              :options="entityOptions"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="All"
+              class="entity-filter-dropdown"
+              data-test="completed-entity-filter"
+            />
+          </div>
         </div>
 
         <div class="projects-grid" data-test="completed-projects">
@@ -137,6 +205,19 @@ const closeImageDialog = () => {
             Ongoing Projects
           </h2>
           <p class="section-subtitle">Projects currently in development</p>
+          <div v-if="entityOptions.length > 1" class="filter-container">
+            <label for="ongoing-entity-filter" class="filter-label">Filter by Team:</label>
+            <PrimeDropdown
+              id="ongoing-entity-filter"
+              v-model="ongoingEntityFilter"
+              :options="entityOptions"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="All"
+              class="entity-filter-dropdown"
+              data-test="ongoing-entity-filter"
+            />
+          </div>
         </div>
 
         <div class="projects-grid" data-test="ongoing-projects">
@@ -243,6 +324,34 @@ const closeImageDialog = () => {
 .section-subtitle {
   font-size: var(--font-size-base);
   opacity: 0.8;
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-4);
+}
+
+.filter-label {
+  color: var(--color-text-white);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  opacity: 0.9;
+}
+
+.entity-filter-dropdown {
+  min-width: 200px;
+}
+
+.entity-filter-dropdown :deep(.p-dropdown) {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.entity-filter-dropdown :deep(.p-dropdown-label) {
+  color: var(--color-text-primary);
 }
 
 .projects-grid {
