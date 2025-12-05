@@ -271,4 +271,24 @@ $gradient-accent-blue: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   --transition-fast: #{$transition-fast};
   --transition-base: #{$transition-base};
   --transition-slow: #{$transition-slow};
+
+  // Line Heights
+  --line-height-tight: #{$line-height-tight};
+  --line-height-snug: #{$line-height-snug};
+  --line-height-normal: #{$line-height-normal};
+  --line-height-relaxed: #{$line-height-relaxed};
+  --line-height-loose: #{$line-height-loose};
+
+  // Font Weights
+  --font-weight-light: #{$font-weight-light};
+  --font-weight-normal: #{$font-weight-normal};
+  --font-weight-medium: #{$font-weight-medium};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold: #{$font-weight-bold};
+  --font-weight-extrabold: #{$font-weight-extrabold};
+
+  // Button Heights
+  --button-height-sm: #{$button-height-sm};
+  --button-height-base: #{$button-height-base};
+  --button-height-lg: #{$button-height-lg};
 }

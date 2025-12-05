@@ -1,0 +1,192 @@
+---
+alwaysApply: true
+---
+# Frontend Styling Rules for Vue Components
+
+## CRITICAL RULES: Follow These Exactly for Reliable Styling
+
+### 1. Always Use CSS Variables in Scoped Styles
+When styling Vue components with `<style scoped>`, ALWAYS use CSS custom properties (not SCSS variables):
+
+✅ **CORRECT:**
+```css
+<style scoped>
+.my-component {
+  color: var(--color-primary);
+  padding: var(--spacing-4);
+  background: var(--color-background-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-base);
+}
+</style>
+```
+
+❌ **WRONG (Don't use SCSS vars in plain scoped CSS):**
+```css
+<style scoped>
+.my-component {
+  color: $primary;  /* Won't work without SCSS compilation */
+  padding: $spacing-4;
+}
+</style>
+```
+
+### 2. Standard Approach (REQUIRED)
+**Always use CSS variables** - they work everywhere and are easier for AI to understand:
+
+```css
+<style scoped>
+.component {
+  /* Colors */
+  color: var(--color-primary);
+  background: var(--color-background-primary);
+  border-color: var(--color-border-light);
+  
+  /* Spacing */
+  padding: var(--spacing-4);
+  margin: var(--spacing-8);
+  gap: var(--spacing-2);
+  
+  /* Typography */
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-family-primary);
+  line-height: var(--line-height-relaxed);
+  
+  /* Borders & Shadows */
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  
+  /* Transitions */
+  transition: var(--transition-base);
+}
+</style>
+```
+
+### 3. Targeting Child Components (PrimeVue, etc.)
+**Always use `:deep()`** to style PrimeVue or child components within scoped styles:
+
+```css
+<style scoped>
+.parent :deep(.p-button) {
+  background: var(--color-primary);
+}
+
+.dialog :deep(.p-dialog-header) {
+  background: var(--color-primary);
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+/* For complex PrimeVue selectors */
+:deep(.p-select-panel),
+:deep([data-pc-name="selectpanel"]) {
+  background: #ffffff !important;
+}
+</style>
+```
+
+### 4. Variable Reference Guide
+
+**CSS Variables (Use in `<style scoped>` - NO imports needed):**
+- Colors: `var(--color-primary)`, `var(--color-text-primary)`, `var(--color-background-primary)`
+- Spacing: `var(--spacing-1)` through `var(--spacing-32)`
+- Typography: `var(--font-size-xs)` through `var(--font-size-6xl)`, `var(--font-weight-bold)`
+- Line Heights: `var(--line-height-tight)`, `var(--line-height-relaxed)`, `var(--line-height-normal)`
+- Borders: `var(--border-radius-sm)` through `var(--border-radius-full)`
+- Shadows: `var(--shadow-sm)`, `var(--shadow-base)`, `var(--shadow-md)`, `var(--shadow-lg)`, `var(--shadow-xl)`, `var(--shadow-2xl)`
+- Transitions: `var(--transition-fast)`, `var(--transition-base)`, `var(--transition-slow)`
+- Button Heights: `var(--button-height-sm)`, `var(--button-height-base)`, `var(--button-height-lg)`
+
+### 5. Component Style Block Format
+
+**Standard format (ALWAYS USE THIS):**
+```vue
+<style scoped>
+/* Use CSS variables - no imports needed, works everywhere */
+.component-class {
+  property: var(--css-variable-name);
+}
+</style>
+```
+
+**DO NOT use SCSS imports in component files:**
+❌ `<style scoped lang="scss">` with `@import '../styles/design-tokens';`
+✅ `<style scoped>` with CSS variables only
+
+### 6. Where to Add Styles
+
+- **Component-specific styles**: Use `<style scoped>` in the component `.vue` file with CSS variables
+- **Global/shared styles**: Add to `frontend/src/styles/styles.scss` (can use SCSS there)
+- **PrimeVue theme overrides**: Add to `frontend/src/styles/primevue-orange-theme.scss` (can use SCSS there)
+- **Design tokens**: Add to `frontend/src/styles/design-tokens.scss` (SCSS file, but outputs CSS variables)
+- **Utility classes**: Add to `frontend/src/styles/utilities.scss` (can use SCSS there)
+
+### 7. Common Patterns
+
+**Hover effects:**
+```css
+.component:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition-base);
+}
+```
+
+**Responsive design:**
+```css
+@media (max-width: 768px) {
+  .component {
+    padding: var(--spacing-4);
+    font-size: var(--font-size-base);
+  }
+}
+```
+
+**PrimeVue component styling:**
+```css
+.card :deep(.p-card-content) {
+  padding: var(--spacing-6);
+}
+
+.button-wrapper :deep(.p-button) {
+  background: var(--color-primary);
+  border-radius: var(--border-radius-lg);
+}
+```
+
+### 8. Mistakes to Avoid
+
+❌ **Don't mix CSS and SCSS variables in component files**
+❌ **Don't forget `:deep()` when targeting PrimeVue components**
+❌ **Don't use SCSS imports (`@import`) in component `<style scoped>` blocks**
+❌ **Don't use `<style scoped lang="scss">` in component files**
+❌ **Don't add inline styles when component styles exist**
+❌ **Don't use hardcoded colors/values when design tokens exist**
+
+### 9. When Updating Styles
+
+When modifying existing component styles:
+1. Use CSS variables (`var(--variable-name)`) - they work everywhere
+2. Always use `:deep()` for PrimeVue component overrides
+3. Follow the existing pattern in that component file
+4. Use design tokens from CSS variables - never hardcode values
+5. Keep styles in `<style scoped>` blocks without SCSS imports
+
+### 10. File Locations Reference
+
+- Design tokens: `frontend/src/styles/design-tokens.scss` (SCSS file that defines CSS variables)
+- Global styles: `frontend/src/styles/styles.scss` (can use SCSS)
+- PrimeVue theme: `frontend/src/styles/primevue-orange-theme.scss` (can use SCSS)
+- Utilities: `frontend/src/styles/utilities.scss` (can use SCSS)
+- Component styles: In each `.vue` file's `<style scoped>` block (CSS variables only)
+
+### 11. Summary: The Golden Rule
+
+**In Vue component files:**
+- ✅ Use `<style scoped>` with CSS variables: `var(--color-primary)`
+- ❌ Do NOT use `<style scoped lang="scss">` with SCSS imports
+- ❌ Do NOT use SCSS variables like `$primary` in component files
+
+**Only in global SCSS files** (styles.scss, design-tokens.scss, etc.):
+- ✅ SCSS variables and imports are allowed

@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import PrimeCard from 'primevue/card';
 import PrimeTag from 'primevue/tag';
 import PrimeChip from 'primevue/chip';
-import CustomButton from './CustomButton.vue';
+import CustomButton from '../CustomButton.vue';
 
 const props = defineProps({
   project: {

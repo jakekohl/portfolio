@@ -1,7 +1,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
-import ProjectCard from '../components/ProjectCard.vue';
+import ProjectCard from '../components/SiteComponents/ProjectCard.vue';
+import DropDown from '../components/FormComponents/DropDown.vue';
 
 const loading = ref(true);
 const projects = ref([]);
@@ -172,7 +173,7 @@ const closeImageDialog = () => {
           <p class="section-subtitle">Finished projects and accomplishments</p>
           <div v-if="entityOptions.length > 1" class="filter-container">
             <label for="completed-entity-filter" class="filter-label">Filter by Team:</label>
-            <PrimeDropdown
+            <DropDown
               id="completed-entity-filter"
               v-model="completedEntityFilter"
               :options="entityOptions"
@@ -207,7 +208,7 @@ const closeImageDialog = () => {
           <p class="section-subtitle">Projects currently in development</p>
           <div v-if="entityOptions.length > 1" class="filter-container">
             <label for="ongoing-entity-filter" class="filter-label">Filter by Team:</label>
-            <PrimeDropdown
+            <DropDown
               id="ongoing-entity-filter"
               v-model="ongoingEntityFilter"
               :options="entityOptions"
@@ -345,15 +346,6 @@ const closeImageDialog = () => {
   min-width: 200px;
 }
 
-.entity-filter-dropdown :deep(.p-dropdown) {
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.entity-filter-dropdown :deep(.p-dropdown-label) {
-  color: var(--color-text-primary);
-}
-
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -361,21 +353,73 @@ const closeImageDialog = () => {
   margin-bottom: var(--spacing-12);
 }
 
-.image-dialog :deep(.p-dialog-header) {
-  background: var(--color-primary);
-  color: white;
-  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+.image-dialog :deep(.p-dialog),
+.image-dialog :deep(.p-dialog-root),
+.image-dialog :deep([data-pc-name="dialog"]) {
+  background: var(--color-background-primary);
+  border-radius: var(--border-radius-3xl) !important;
+  overflow: hidden !important;
+}
+
+.image-dialog :deep(.p-dialog-header),
+.image-dialog :deep(.p-dialog .p-dialog-header),
+.image-dialog :deep([data-pc-name="dialog"] .p-dialog-header),
+.image-dialog :deep([data-pc-name="dialog"] [data-pc-section="header"]),
+.image-dialog :deep(.p-dialog-root .p-dialog-header) {
+  background: #f97316 !important;
+  background-color: #f97316 !important;
+  background-image: none !important;
+  color: white !important;
+  border-radius: var(--border-radius-3xl) var(--border-radius-3xl) 0 0 !important;
+  border-top-left-radius: var(--border-radius-3xl) !important;
+  border-top-right-radius: var(--border-radius-3xl) !important;
+  padding: var(--spacing-4) var(--spacing-6);
+  opacity: 1 !important;
+  overflow: hidden !important;
+}
+
+.image-dialog :deep(.p-dialog-header-content),
+.image-dialog :deep([data-pc-section="header"]),
+.image-dialog :deep([data-pc-section="headertitle"]) {
+  background: #f97316 !important;
+  background-color: #f97316 !important;
+  background-image: none !important;
+  opacity: 1 !important;
+  border-radius: inherit !important;
+}
+
+.image-dialog :deep(.p-dialog-header h3),
+.image-dialog :deep(.p-dialog-header .dialog-title) {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.image-dialog :deep(.p-dialog-header-icon),
+.image-dialog :deep([data-pc-section="closeicon"]),
+.image-dialog :deep(.p-dialog-header-icon *) {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--color-text-white) !important;
+}
+
+.image-dialog :deep(.p-dialog-content) {
+  background: var(--color-background-primary);
+  padding: 0;
 }
 
 .dialog-title {
   margin: 0;
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
+  color: var(--color-text-white);
+  background: transparent;
 }
 
 .dialog-content {
   text-align: center;
-  padding: var(--spacing-4);
+  padding: var(--spacing-6);
+  background: var(--color-background-primary);
+  border-radius: 0 0 var(--border-radius-3xl) var(--border-radius-3xl);
 }
 
 .dialog-image {
@@ -384,8 +428,11 @@ const closeImageDialog = () => {
   max-height: 70vh;
   object-fit: contain;
   border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-xl);
   margin-bottom: var(--spacing-4);
+  background: var(--color-background-secondary);
+  padding: var(--spacing-4);
+  border: 1px solid var(--color-border-light);
 }
 
 .dialog-caption {
@@ -434,3 +481,4 @@ const closeImageDialog = () => {
   }
 }
 </style>
+

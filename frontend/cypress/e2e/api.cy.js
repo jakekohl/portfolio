@@ -43,6 +43,15 @@ describe('API Tests', () => {
         expect(response.body.length).to.be.greaterThan(0);
       });
     });
+
+    it('GET /projects/entities should return a 200 status code and a list of entities', () => {
+      cy.request('GET', `${apiUrl}/projects/entities`).then((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.body).to.be.an('Object');
+        expect(response.body).to.have.property('entities');
+        expect(response.body.entities).to.be.an('Array')
+      })
+    })
   });
 
   context('Contact', () => {

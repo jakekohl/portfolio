@@ -52,11 +52,11 @@ const goBack = () => {
 <style scoped>
 .notfound-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-accent-blue) 0%, var(--color-accent-blue-dark) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: var(--spacing-8);
 }
 
 .content-wrapper {
@@ -66,50 +66,50 @@ const goBack = () => {
 
 .notfound-card {
   border: none;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-2xl);
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
 }
 
 .notfound-content {
   text-align: center;
-  padding: 2rem;
+  padding: var(--spacing-8);
 }
 
 .error-icon {
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-8);
 }
 
 .error-icon i {
-  font-size: 5rem;
-  color: #f59e0b;
+  font-size: var(--font-size-6xl);
+  color: var(--color-warning);
 }
 
 .error-title {
-  font-size: 6rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin: 0 0 1rem 0;
-  line-height: 1;
+  font-size: var(--font-size-6xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-4) 0;
+  line-height: var(--line-height-tight);
 }
 
 .error-subtitle {
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: #374151;
-  margin: 0 0 1.5rem 0;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--spacing-6) 0;
 }
 
 .error-description {
-  font-size: 1.25rem;
-  color: #64748b;
-  line-height: 1.6;
-  margin-bottom: 2.5rem;
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-10);
 }
 
 .error-actions {
   display: flex;
-  gap: 1rem;
+  gap: var(--spacing-4);
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -117,15 +117,15 @@ const goBack = () => {
 /* Responsive Design */
 @media (max-width: 768px) {
   .error-title {
-    font-size: 4rem;
+    font-size: var(--font-size-5xl);
   }
   
   .error-subtitle {
-    font-size: 2rem;
+    font-size: var(--font-size-2xl);
   }
   
   .error-description {
-    font-size: 1rem;
+    font-size: var(--font-size-base);
   }
   
   .error-actions {
@@ -134,7 +134,7 @@ const goBack = () => {
   }
   
   .notfound-container {
-    padding: 1rem;
+    padding: var(--spacing-4);
   }
 }
 </style>

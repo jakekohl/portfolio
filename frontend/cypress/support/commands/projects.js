@@ -36,3 +36,14 @@ Cypress.Commands.add('validateProjectCard', (project) => {
     cy.getDataTest('project-demo-button').should(project.demo ? 'be.visible' : 'not.exist');
   });
 });
+
+/**
+ * Selects Team Filter for Completed or Ongoing Projects
+ * 
+ * @param value {String} - The Team value to filter on
+ * @param list {String} - completed or ongoing
+ */
+Cypress.Commands.add('selectTeamFilter', (value, list = 'completed') => {
+  cy.clickDataTest(`${list}-entity-filter`)
+  cy.clickAriaLabel(value)
+})

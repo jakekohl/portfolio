@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import PrimeCard from 'primevue/card';
 import PrimeSkeleton from 'primevue/skeleton';
-import PrimeDropdown from 'primevue/dropdown';
+import DropDown from './FormComponents/DropDown.vue';
 
 const loading = ref(true);
 const error = ref(null);
@@ -311,16 +311,13 @@ onMounted(() => {
                     </span>
                   </div>
                   <div class="year-selector">
-                    <PrimeDropdown
+                    <DropDown
                       v-model="selectedYear"
                       :options="availableYears"
                       optionLabel="label"
                       optionValue="value"
                       placeholder="Select Year"
                       class="year-dropdown"
-                      :pt="{
-                        panel: { class: 'year-dropdown-panel' }
-                      }"
                       data-test="github-year-selector"
                       :showClear="false"
                     />
@@ -384,8 +381,7 @@ onMounted(() => {
   </section>
 </template>
 
-<style scoped lang="scss">
-@import '../styles/design-tokens';
+<style scoped>
 
 .github-heatmap-section {
   background: var(--p-accent-blue-darker);
@@ -429,15 +425,17 @@ onMounted(() => {
   overflow: hidden;
   cursor: pointer;
   
+  /* Ripple effect on click */
+  
   i {
     font-size: 1.5rem;
     z-index: 1;
     position: relative;
     transition: transform 0.3s ease;
   }
-  
-  // Ripple effect on click
-  &::before {
+}
+
+.github-link-button::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -449,33 +447,32 @@ onMounted(() => {
     opacity: 0.3;
     transform: translate(-50%, -50%);
     transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
-  }
-  
-  &:hover {
+}
+
+.github-link-button:hover {
     background: var(--color-primary);
     color: var(--color-text-white);
     transform: scale(1.1);
     box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
-    
-    i {
-      transform: scale(1.1) rotate(5deg);
-    }
-  }
-  
-  &:active {
-    transform: scale(0.95);
-    
-    &::before {
-      width: 200px;
-      height: 200px;
-      opacity: 0;
-    }
-  }
-  
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.3);
-  }
+}
+
+.github-link-button:hover i {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.github-link-button:active {
+  transform: scale(0.95);
+}
+
+.github-link-button:active::before {
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+}
+
+.github-link-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.3);
 }
 
 .heatmap-wrapper-container {
@@ -488,7 +485,7 @@ onMounted(() => {
   border: none;
   box-shadow: var(--shadow-xl);
   width: 100%;
-  // Max width based on fixed year width (821px) + padding (48px on each side = 96px)
+  /* Max width based on fixed year width (821px) + padding (48px on each side = 96px) */
   max-width: 917px;
   margin: 0 auto;
 }
@@ -530,33 +527,12 @@ onMounted(() => {
 
 .year-selector {
   min-width: 150px;
-  z-index: 10; // Ensure dropdown appears above graph
+  z-index: 10; /* Ensure dropdown appears above graph */
   position: relative;
 }
 
 .year-dropdown {
   width: 100%;
-  
-  // Style the input field (this works with :deep)
-  :deep(.p-dropdown) {
-    background: var(--color-background-primary) !important;
-    border: 1px solid var(--color-border-medium) !important;
-    
-    .p-dropdown-label {
-      background: var(--color-background-primary) !important;
-      color: var(--color-text-primary) !important;
-    }
-    
-    .p-dropdown-trigger {
-      background: var(--color-background-primary) !important;
-    }
-    
-    &:focus,
-    &:focus-within {
-      border-color: var(--color-primary) !important;
-      box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.1) !important;
-    }
-  }
 }
 
 
@@ -571,47 +547,49 @@ onMounted(() => {
   overflow-y: hidden;
   padding: var(--spacing-4) var(--spacing-6);
   width: 100%;
-  -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
-  
-  // Custom scrollbar styling
-  &::-webkit-scrollbar {
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Custom scrollbar styling */
+.heatmap-wrapper::-webkit-scrollbar {
     height: 8px;
-  }
-  
-  &::-webkit-scrollbar-track {
+}
+
+.heatmap-wrapper::-webkit-scrollbar-track {
     background: var(--color-background-secondary);
     border-radius: var(--border-radius-base);
-  }
-  
-  &::-webkit-scrollbar-thumb {
+}
+
+.heatmap-wrapper::-webkit-scrollbar-thumb {
     background: var(--color-primary);
     border-radius: var(--border-radius-base);
-    
-    &:hover {
-      background: var(--color-primary-dark);
-    }
-  }
-  
-  // On desktop, center the content if it fits
-  @media (min-width: 769px) {
+}
+
+.heatmap-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
+}
+
+/* On desktop, center the content if it fits */
+@media (min-width: 769px) {
+  .heatmap-wrapper {
     display: flex;
     justify-content: center;
   }
 }
 
 .heatmap-grid-container {
-  // Fixed width for one year: 
-  // 53 weeks max in a year
-  // Each week: 11px (square) + 4px (gap) = 15px
-  // Total weeks width: 53 * 11px + 52 * 4px = 583px + 208px = 791px
-  // Day labels: ~30px margin
-  // Total: ~821px
+  /* Fixed width for one year: */
+  /* 53 weeks max in a year */
+  /* Each week: 11px (square) + 4px (gap) = 15px */
+  /* Total weeks width: 53 * 11px + 52 * 4px = 583px + 208px = 791px */
+  /* Day labels: ~30px margin */
+  /* Total: ~821px */
   width: fit-content;
   min-width: 821px;
   margin: 0 auto;
   
   @media (max-width: 768px) {
-    min-width: 821px; // Keep full width, let it scroll
+    min-width: 821px; /* Keep full width, let it scroll */
     margin: 0;
   }
 }
@@ -621,7 +599,7 @@ onMounted(() => {
   height: 20px;
   margin-bottom: var(--spacing-2);
   width: 100%;
-  min-width: 821px; // Match weeks width
+  min-width: 821px; /* Match weeks width */
 }
 
 .month-label {
@@ -629,7 +607,7 @@ onMounted(() => {
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
   white-space: nowrap;
-  // Labels are positioned using exact pixel values from computed property
+  /* Labels are positioned using exact pixel values from computed property */
 }
 
 .contributions-header {
@@ -638,7 +616,7 @@ onMounted(() => {
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  min-width: 821px; // Match graph width
+  min-width: 821px; /* Match graph width */
 }
 
 .contributions-text {
@@ -662,13 +640,13 @@ onMounted(() => {
   display: flex;
   gap: var(--spacing-1);
   align-items: flex-start;
-  width: fit-content; // Fit content width, don't stretch
+  width: fit-content; /* Fit content width, don't stretch */
 }
 
 .weeks-container {
   display: flex;
   gap: var(--spacing-1);
-  flex: 0 0 auto; // Don't expand, only take needed space
+  flex: 0 0 auto; /* Don't expand, only take needed space */
 }
 
 .week {
@@ -683,15 +661,15 @@ onMounted(() => {
   border-radius: 2px;
   cursor: pointer;
   transition: transform 0.1s ease, opacity 0.1s ease;
-  flex-shrink: 0; // Prevent squares from shrinking
-  
-  &:hover {
+  flex-shrink: 0; /* Prevent squares from shrinking */
+}
+
+.day-square:hover {
     transform: scale(1.2);
     opacity: 0.8;
     outline: 1px solid var(--color-border-medium);
     z-index: 10;
-    position: relative;
-  }
+  position: relative;
 }
 
 .heatmap-legend {
@@ -703,7 +681,7 @@ onMounted(() => {
   color: var(--color-text-secondary);
   margin-top: var(--spacing-4);
   width: 100%;
-  min-width: 821px; // Match graph width
+  min-width: 821px; /* Match graph width */
 }
 
 .legend-content {
@@ -752,10 +730,10 @@ onMounted(() => {
   .github-link-button {
     width: 40px;
     height: 40px;
-    
-    i {
-      font-size: 1.25rem;
-    }
+  }
+  
+  .github-link-button i {
+    font-size: 1.25rem;
   }
   
   .heatmap-wrapper-container {
@@ -807,25 +785,25 @@ onMounted(() => {
   
   .heatmap-wrapper {
     padding: var(--spacing-2) var(--spacing-3);
-    // Enhanced mobile scrolling - let it scroll horizontally
+    /* Enhanced mobile scrolling - let it scroll horizontally */
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    justify-content: flex-start; // Don't center on mobile
+    justify-content: flex-start; /* Don't center on mobile */
   }
   
   .heatmap-grid-container {
-    margin: 0; // Remove auto margin on mobile
+    margin: 0; /* Remove auto margin on mobile */
   }
   
   .day-labels {
     margin-right: var(--spacing-1);
-    
-    span {
-      font-size: 9px;
-      height: 9px;
-      line-height: 9px;
-    }
+  }
+  
+  .day-labels span {
+    font-size: 9px;
+    height: 9px;
+    line-height: 9px;
   }
   
   .day-square {
@@ -842,7 +820,7 @@ onMounted(() => {
   .heatmap-months {
     margin-left: 22px;
     height: 18px;
-    min-width: 791px; // Keep full width for scrolling
+    min-width: 791px; /* Keep full width for scrolling */
   }
   
   .month-label {
@@ -897,69 +875,27 @@ onMounted(() => {
   
   .heatmap-months {
     margin-left: 20px;
-    min-width: 791px; // Keep full width for scrolling
+    min-width: 791px; /* Keep full width for scrolling */
   }
   
   .heatmap-legend {
     margin-left: 20px;
   }
   
-  // Adjust week width calculation for smaller squares (8px)
-  // 53 weeks * 8px + 52 gaps * 4px = 424px + 208px = 632px
-  // Day labels: ~20px margin
-  // Total: ~652px
+  /* Adjust week width calculation for smaller squares (8px) */
+  /* 53 weeks * 8px + 52 gaps * 4px = 424px + 208px = 632px */
+  /* Day labels: ~20px margin */
+  /* Total: ~652px */
   .heatmap-grid-container {
     min-width: 652px;
   }
   
   .heatmap-months {
-    min-width: 632px; // Adjusted for smaller squares (8px)
+    min-width: 632px; /* Adjusted for smaller squares (8px) */
   }
 }
 </style>
 
-<!-- Non-scoped styles for PrimeVue dropdown panel (rendered in portal) -->
-<style>
-/* Global styles for year dropdown panel - rendered outside component */
-/* Using both class selector and attribute selector for maximum compatibility */
-.p-dropdown-panel.year-dropdown-panel,
-.p-dropdown-panel[class*="year-dropdown"] {
-  background: #ffffff !important;
-  background: var(--color-background-primary, #ffffff) !important;
-  border: 1px solid #000000 !important;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-  box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)) !important;
-  z-index: 1000 !important;
-}
-
-.p-dropdown-panel.year-dropdown-panel .p-dropdown-items-wrapper,
-.p-dropdown-panel[class*="year-dropdown"] .p-dropdown-items-wrapper {
-  background: #ffffff !important;
-  background: var(--color-background-primary, #ffffff) !important;
-}
-
-.p-dropdown-panel.year-dropdown-panel .p-dropdown-item,
-.p-dropdown-panel[class*="year-dropdown"] .p-dropdown-item {
-  background: #ffffff !important;
-  background: var(--color-background-primary, #ffffff) !important;
-  color: #111827 !important;
-  color: var(--color-text-primary, #111827) !important;
-}
-
-.p-dropdown-panel.year-dropdown-panel .p-dropdown-item:hover,
-.p-dropdown-panel[class*="year-dropdown"] .p-dropdown-item:hover {
-  background: #f9fafb !important;
-  background: var(--color-background-secondary, #f9fafb) !important;
-}
-
-.p-dropdown-panel.year-dropdown-panel .p-dropdown-item.p-highlight,
-.p-dropdown-panel[class*="year-dropdown"] .p-dropdown-item.p-highlight {
-  background: #ffedd5 !important;
-  background: var(--color-primary-lightest, #ffedd5) !important;
-  color: #ea580c !important;
-  color: var(--color-primary-dark, #ea580c) !important;
-}
-</style>
 
 <!-- Non-scoped styles for tooltip -->
 <style>

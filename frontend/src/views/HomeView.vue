@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue';
+import CustomButton from '../components/CustomButton.vue'
 import GitHubHeatmap from '../components/GitHubHeatmap.vue';
 import { useToast } from 'primevue/usetoast';
 
@@ -256,7 +257,7 @@ onMounted(() => {
 
 .stat-icon {
   font-size: var(--font-size-5xl);
-  color: #f97316;
+  color: var(--color-primary);
   margin-bottom: var(--spacing-4);
 }
 

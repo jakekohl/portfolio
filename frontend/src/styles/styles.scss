@@ -228,6 +228,128 @@ body {
   }
 }
 
+// Select and Dropdown panel styling - ensure non-transparent backgrounds
+// PrimeVue select/dropdown panels render in portals, so they need global styles
+// Target all possible PrimeVue 4.x select and dropdown panel variations
+.p-select-panel,
+.p-dropdown-panel,
+[data-pc-name="selectpanel"],
+[data-pc-name="dropdownpanel"],
+.p-overlaypanel,
+.p-listbox-panel,
+*[class*="select-panel"],
+*[class*="dropdown-panel"],
+*[data-pc-name*="select"],
+*[data-pc-name*="dropdown"] {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background: var(--p-background-color, #ffffff) !important;
+  background-color: var(--p-background-color, #ffffff) !important;
+  border: 3px solid #000000 !important;
+  border-width: 3px !important;
+  border-style: solid !important;
+  border-color: #000000 !important;
+  border-top: 3px solid #000000 !important;
+  border-right: 3px solid #000000 !important;
+  border-bottom: 3px solid #000000 !important;
+  border-left: 3px solid #000000 !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  z-index: 1000 !important;
+}
+
+.p-select-panel .p-select-list-wrapper,
+.p-dropdown-panel .p-dropdown-items-wrapper,
+.p-select-panel [data-pc-section="list"],
+.p-dropdown-panel [data-pc-section="list"],
+.p-dropdown-panel .p-listbox-list-wrapper,
+[data-pc-name="selectpanel"] [data-pc-section="list"],
+[data-pc-name="dropdownpanel"] [data-pc-section="list"],
+[data-pc-name="selectpanel"] .p-select-list-wrapper,
+[data-pc-name="dropdownpanel"] .p-dropdown-items-wrapper {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background: var(--p-background-color, #ffffff) !important;
+  background-color: var(--p-background-color, #ffffff) !important;
+}
+
+.p-select-panel .p-select-item,
+.p-dropdown-panel .p-dropdown-item,
+.p-select-panel [data-pc-section="item"],
+.p-dropdown-panel [data-pc-section="item"],
+.p-dropdown-panel .p-listbox-item,
+[data-pc-name="selectpanel"] [data-pc-section="item"],
+[data-pc-name="dropdownpanel"] [data-pc-section="item"],
+[data-pc-name="selectpanel"] .p-select-item,
+[data-pc-name="dropdownpanel"] .p-dropdown-item {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background: var(--p-background-color, #ffffff) !important;
+  background-color: var(--p-background-color, #ffffff) !important;
+  color: var(--p-text-color, #111827) !important;
+}
+
+.p-select-panel .p-select-item:hover,
+.p-dropdown-panel .p-dropdown-item:hover,
+.p-select-panel [data-pc-section="item"]:hover,
+.p-dropdown-panel [data-pc-section="item"]:hover,
+.p-dropdown-panel .p-listbox-item:hover,
+[data-pc-name="selectpanel"] [data-pc-section="item"]:hover,
+[data-pc-name="dropdownpanel"] [data-pc-section="item"]:hover,
+[data-pc-name="selectpanel"] .p-select-item:hover,
+[data-pc-name="dropdownpanel"] .p-dropdown-item:hover {
+  background: var(--p-background-color-secondary, #f9fafb) !important;
+  background-color: var(--p-background-color-secondary, #f9fafb) !important;
+}
+
+.p-select-panel .p-select-item.p-highlight,
+.p-dropdown-panel .p-dropdown-item.p-highlight,
+.p-select-panel [data-pc-section="item"].p-highlight,
+.p-dropdown-panel [data-pc-section="item"].p-highlight,
+.p-dropdown-panel .p-listbox-item.p-highlight,
+[data-pc-name="selectpanel"] [data-pc-section="item"].p-highlight,
+[data-pc-name="dropdownpanel"] [data-pc-section="item"].p-highlight,
+[data-pc-name="selectpanel"] .p-select-item.p-highlight,
+[data-pc-name="dropdownpanel"] .p-dropdown-item.p-highlight {
+  background: var(--p-primary-color-lightest, #ffedd5) !important;
+  background-color: var(--p-primary-color-lightest, #ffedd5) !important;
+  color: var(--p-primary-color-dark, #ea580c) !important;
+}
+
+// Dialog header styling - ensure non-transparent backgrounds
+// PrimeVue dialogs render in portals, so they need global styles
+// Target all possible PrimeVue dialog header variations
+.image-dialog .p-dialog-header,
+.p-dialog-header.image-dialog,
+.image-dialog [data-pc-name="dialog"] .p-dialog-header,
+.image-dialog [data-pc-name="dialog"] [data-pc-section="header"],
+.image-dialog .p-dialog-root .p-dialog-header {
+  background: #f97316 !important;
+  background-color: #f97316 !important;
+  background-image: none !important;
+  border-radius: var(--border-radius-3xl) var(--border-radius-3xl) 0 0 !important;
+  border-top-left-radius: var(--border-radius-3xl) !important;
+  border-top-right-radius: var(--border-radius-3xl) !important;
+  opacity: 1 !important;
+  overflow: hidden !important;
+}
+
+.image-dialog .p-dialog-header-content,
+.image-dialog [data-pc-section="header"],
+.image-dialog [data-pc-section="headertitle"] {
+  background: #f97316 !important;
+  background-color: #f97316 !important;
+  background-image: none !important;
+  opacity: 1 !important;
+  border-radius: inherit !important;
+}
+
+.image-dialog .p-dialog,
+.image-dialog .p-dialog-root,
+.image-dialog [data-pc-name="dialog"] {
+  border-radius: var(--border-radius-3xl) !important;
+  overflow: hidden !important;
+}
+
 // ===== GLOBAL ACCESSIBILITY & ENHANCEMENTS =====
 // Focus styles for accessibility
 *:focus {

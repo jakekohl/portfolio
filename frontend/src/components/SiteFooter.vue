@@ -18,57 +18,55 @@ import { computed } from 'vue';
 const currentYear = computed(() => new Date().getFullYear());
 </script>
 
-<style scoped lang="scss">
-@import '../styles/design-tokens';
-
+<style scoped>
 .site-footer {
   width: 100%;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  border-top: 1px solid $border-light;
+  border-top: 1px solid var(--color-border-light);
   margin-top: auto;
-  padding: $spacing-6 0;
+  padding: var(--spacing-6) 0;
 }
 
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 $spacing-4;
+  padding: 0 var(--spacing-4);
   text-align: center;
 }
 
 .footer-text {
-  font-size: $font-size-sm;
-  color: $text-secondary;
-  margin: 0 0 $spacing-2 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--spacing-2) 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: $spacing-2;
-  line-height: $line-height-relaxed;
+  gap: var(--spacing-2);
+  line-height: var(--line-height-relaxed);
 }
 
 .footer-icon {
-  color: $primary;
-  font-size: $font-size-base;
+  color: var(--color-primary);
+  font-size: var(--font-size-base);
 }
 
 .footer-copyright {
-  font-size: $font-size-xs;
-  color: $text-tertiary;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
   margin: 0;
-  line-height: $line-height-normal;
+  line-height: var(--line-height-normal);
 }
 
-@media (max-width: $breakpoint-md) {
+@media (max-width: 768px) {
   .footer-content {
-    padding: 0 $spacing-3;
+    padding: 0 var(--spacing-3);
   }
 
   .footer-text {
-    font-size: $font-size-xs;
+    font-size: var(--font-size-xs);
     flex-direction: column;
-    gap: $spacing-1;
+    gap: var(--spacing-1);
   }
 }
 </style>

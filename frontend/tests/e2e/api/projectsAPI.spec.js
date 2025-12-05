@@ -23,4 +23,14 @@ test.describe('Projects API Tests', () => {
       expect(project).toHaveProperty('images');
     }
   });
+
+  test('GET /projects/entities - should return a 200 status code and a list of entities', async ({ request }) => {
+    const projectEntitiesPromise = await request.get(`${apiUrl}/projects/entities`);
+    const projectEntitiesResponse = await projectEntitiesPromise;
+    const projectEntitiesResponseBody = await projectEntitiesResponse.json();
+
+    console.log(projectEntitiesResponseBody);
+    expect(projectEntitiesResponse.status()).toBe(200);
+    expect(projectEntitiesResponseBody.entities).toBeInstanceOf(Array);
+  });
 });
