@@ -29,7 +29,6 @@ test.describe('Projects API Tests', () => {
     const projectEntitiesResponse = await projectEntitiesPromise;
     const projectEntitiesResponseBody = await projectEntitiesResponse.json();
 
-    console.log(projectEntitiesResponseBody);
     expect(projectEntitiesResponse.status()).toBe(200);
     expect(projectEntitiesResponseBody.entities).toBeInstanceOf(Array);
   });

@@ -9,11 +9,14 @@ class ProjectResponse(BaseModel):
   title: str
   entity: Optional[str] = None
   description: str
+  startDate: Optional[str] = None
+  endDate: Optional[str] = None
   technologies: list[str]
   skillsLeveraged: list[str]
   status: str
   github: Optional[str] = None
   demo: Optional[str] = None
+  url: Optional[str] = None
   features: list[str]
   dataTest: str
   images: list[Dict[str, str]] = []
@@ -53,6 +56,29 @@ async def get_entities():
     entities = ProjectsService().get_entities()
     return EntityResponse(entities=entities)
   except Exception as e:
+    raise HTTPException(
+      status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+      detail="Service temporarily unavailable. Please try again later."
+    )
+
+@router.post("/projects", response_model=ProjectResponse)
+async def create_project(project: ProjectResponse):
+  """Creates a new project
+
+  Query Parameters:
+    - None
+
+  Returns:
+    - The created project
+  """
+  try:
+    project = ProjectsService().create_project(project=project)
+    return project
+  except HTTPException:
+    # Re-raise HTTP exceptions (like 404)
+    raise
+  except Exception as e:
+    # Handle any other errors (like MongoDB connection issues)
     raise HTTPException(
       status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
       detail="Service temporarily unavailable. Please try again later."

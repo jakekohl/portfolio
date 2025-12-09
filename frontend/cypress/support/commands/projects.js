@@ -10,6 +10,7 @@
  * @param {string[]} project.features - The project features
  * @param {boolean} project.github - Whether the project has a GitHub button
  * @param {boolean} project.demo - Whether the project has a demo button
+ * @param {boolean} project.url - Whether the project has a url button
  */
 Cypress.Commands.add('validateProjectCard', (project) => {
   cy.getDataTest(project.dataTest).should('be.visible').within(() => {
@@ -34,16 +35,17 @@ Cypress.Commands.add('validateProjectCard', (project) => {
     });
     cy.getDataTest('project-code-button').should(project.github ? 'be.visible' : 'not.exist');
     cy.getDataTest('project-demo-button').should(project.demo ? 'be.visible' : 'not.exist');
+    cy.getDataTest('project-url-button').should(project.url ? 'be.visible' : 'not.exist');
   });
 });
 
 /**
  * Selects Team Filter for Completed or Ongoing Projects
- * 
+ *
  * @param value {String} - The Team value to filter on
  * @param list {String} - completed or ongoing
  */
 Cypress.Commands.add('selectTeamFilter', (value, list = 'completed') => {
-  cy.clickDataTest(`${list}-entity-filter`)
-  cy.clickAriaLabel(value)
-})
+  cy.clickDataTest(`${list}-entity-filter`);
+  cy.clickAriaLabel(value);
+});

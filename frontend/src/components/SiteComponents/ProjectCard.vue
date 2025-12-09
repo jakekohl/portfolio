@@ -12,7 +12,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['open-image', 'open-github', 'open-demo']);
+const emit = defineEmits(['open-image', 'open-github', 'open-demo', 'open-url']);
 
 const isCompleted = computed(() => props.project.status === 'Completed');
 const statusSeverity = computed(() => {
@@ -31,6 +31,11 @@ const handleGithubClick = () => {
 const handleDemoClick = () => {
   emit('open-demo', props.project.demo);
 };
+
+const handleUrlClick = () => {
+  emit('open-url', props.project.url);
+};
+
 </script>
 
 <template>
@@ -129,6 +134,14 @@ const handleDemoClick = () => {
           variant="gradient"
           data-test="project-demo-button"
           @click="handleDemoClick"
+        />
+        <CustomButton
+          v-if="project.url"
+          label="Learn More"
+          icon="pi pi-external-link"
+          variant="gradient"
+          data-test="project-url-button"
+          @click="handleUrlClick"
         />
       </div>
     </template>

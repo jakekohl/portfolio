@@ -84,9 +84,6 @@ const completedProjects = computed(() => {
   return filtered;
 });
 
-const hasOngoingProjects = computed(() => ongoingProjects.value.length > 0);
-const hasCompletedProjects = computed(() => completedProjects.value.length > 0);
-
 // Dropdown options for both filters (with "All" as default)
 const entityOptions = computed(() => {
   const options = [{ label: 'All', value: null }];
@@ -112,24 +109,20 @@ const openExternalLink = (url) => {
   }
 };
 
-const openGithubRepo = (githubUrl) => {
-  openExternalLink(githubUrl);
-};
-
-const openLiveDemo = (demoUrl) => {
-  openExternalLink(demoUrl);
-};
-
 const handleImageClick = (image) => {
   openImageDialog(image);
 };
 
 const handleGithubClick = (githubUrl) => {
-  openGithubRepo(githubUrl);
+  openExternalLink(githubUrl);
 };
 
 const handleDemoClick = (demoUrl) => {
-  openLiveDemo(demoUrl);
+  openExternalLink(demoUrl);
+};
+
+const handleUrlClick = (url) => {
+  openExternalLink(url);
 };
 
 // Image gallery dialog state
@@ -164,7 +157,7 @@ const closeImageDialog = () => {
       </div>
 
       <!-- Completed Projects Section -->
-      <div v-if="hasCompletedProjects" class="projects-section">
+      <div v-if="completedProjects.length > 0" class="projects-section">
         <div class="section-header">
           <h2 class="section-title">
             <i class="pi pi-check-circle mr-2"></i>
@@ -186,7 +179,7 @@ const closeImageDialog = () => {
           </div>
         </div>
 
-        <div class="projects-grid" data-test="completed-projects">
+        <div v-if="completedProjects.length > 0" class="projects-grid" data-test="completed-projects">
           <ProjectCard
             v-for="project in completedProjects"
             :key="project.title"
@@ -194,12 +187,13 @@ const closeImageDialog = () => {
             @open-image="handleImageClick"
             @open-github="handleGithubClick"
             @open-demo="handleDemoClick"
+            @open-url="handleUrlClick"
           />
         </div>
       </div>
 
       <!-- Ongoing Projects Section -->
-      <div v-if="hasOngoingProjects" class="projects-section">
+      <div class="projects-section">
         <div class="section-header">
           <h2 class="section-title">
             <i class="pi pi-clock mr-2"></i>
@@ -221,7 +215,7 @@ const closeImageDialog = () => {
           </div>
         </div>
 
-        <div class="projects-grid" data-test="ongoing-projects">
+        <div v-if="ongoingProjects.length > 0" class="projects-grid" data-test="ongoing-projects">
           <ProjectCard
             v-for="project in ongoingProjects"
             :key="project.title"
@@ -229,22 +223,23 @@ const closeImageDialog = () => {
             @open-image="handleImageClick"
             @open-github="handleGithubClick"
             @open-demo="handleDemoClick"
+            @open-url="handleUrlClick"
           />
+        </div>
+        <div v-else class="coming-soon">
+          <PrimeCard class="coming-soon-card">
+            <template #content>
+              <div class="text-center">
+                <h3>No Ongoing Projects with the selected team</h3>
+                <p>There are no ongoing projects with the selected team. Try selecting a different team or clearing the filter.</p>
+              </div>
+            </template>
+          </PrimeCard>
         </div>
       </div>
 
       <!-- Coming Soon Section -->
-      <div class="coming-soon">
-        <PrimeCard class="coming-soon-card">
-          <template #content>
-            <div class="text-center">
-              <i class="pi pi-clock text-6xl text-primary mb-4"></i>
-              <h3>More Projects Coming Soon!</h3>
-              <p>I'm constantly working on new projects and will update this portfolio regularly.</p>
-            </div>
-          </template>
-        </PrimeCard>
-      </div>
+      
     </div>
 
     <!-- Image Preview Dialog -->

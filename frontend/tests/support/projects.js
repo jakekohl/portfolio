@@ -29,5 +29,6 @@ export async function verifyProjects(page, projects) {
     await expect(page.getByTestId(project.dataTest).getByTestId('project-images')).toBeVisible({ visible: project.images.length > 0 ? true : false });
     await expect(page.getByTestId(project.dataTest).getByTestId('project-code-button')).toBeVisible({ visible: project.github ? true : false });
     await expect(page.getByTestId(project.dataTest).getByTestId('project-demo-button')).toBeVisible({ visible: project.demo ? true : false });
+    await expect(page.getByTestId(project.dataTest).getByTestId('project-url-button')).toBeVisible({ visible: project.url ? true : false });
   }
 }
