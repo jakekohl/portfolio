@@ -8,7 +8,7 @@ class RolesService:
 
   def get_roles(self):
     try:
-      result = self.collection.find (sort=[("order", 1)])
+      result = self.collection.find(sort=[("startDate", -1)])
       return list(result)
     except (ServerSelectionTimeoutError, ConnectionFailure, PyMongoError) as e:
       print(f"MongoDB connection error in get_roles: {str(e)}")

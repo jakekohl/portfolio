@@ -13,7 +13,7 @@ class RoleResponse(BaseModel):
   logo: Optional[str]
   location: str
   startDate: str
-  endDate: str
+  endDate: Optional[str]
   description: list[str]
   url: str
   dataTest: str
