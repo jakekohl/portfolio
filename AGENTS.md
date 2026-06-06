@@ -105,6 +105,9 @@ npm run dev       # or: npm run serve (depending on Vue version / config)
 - **No inline styles** — keep styling in SCSS.
 
 ### Testing (Frontend)
+- This portfolio is setup to demonstrate E2E Test Automation. 
+- Cypress and Playwright should have parity in test coverage, though the test suite organization and assertions may not be 1:1 based on the strengths and drawbacks of each.
+- If there is a situation where one suite should be prioritized, lean towards Cypress.
 
 #### Cypress
 ```bash
