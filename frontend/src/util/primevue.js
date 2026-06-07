@@ -11,7 +11,7 @@ import Timeline from 'primevue/timeline';
 import ProgressBar from 'primevue/progressbar';
 import ProgressSpinner from 'primevue/progressspinner';
 import Dialog from 'primevue/dialog';
-import Select from 'primevue/select'
+import Select from 'primevue/select';
 import Sidebar from 'primevue/sidebar';
 import Tooltip from 'primevue/tooltip';
 

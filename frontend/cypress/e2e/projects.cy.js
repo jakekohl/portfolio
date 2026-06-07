@@ -15,7 +15,8 @@ describe('Projects', () => {
   });
 
   it('should show a list of completed projects', () => {
-    const teamFilter = 'Tagboard'
+    const teamFilter = 'Tagboard';
+
     cy.getDataTest('completed-projects').should('be.visible').within(() => {
       completedProjects.forEach((project) => {
         cy.validateProjectCard(project);
@@ -24,12 +25,13 @@ describe('Projects', () => {
     cy.selectTeamFilter(teamFilter, 'completed').then(() => {
       completedProjects.forEach((project) => {
         cy.getDataTest(project.dataTest).should(project.entity === teamFilter ? 'be.visible' : 'not.exist');
-      })
-    })
+      });
+    });
   });
 
   it('should show a list of ongoing projects', () => {
-    const teamFilter = 'Tagboard'
+    const teamFilter = 'Tagboard';
+
     cy.getDataTest('ongoing-projects').should('be.visible').within(() => {
       ongoingProjects.forEach((project) => {
         cy.validateProjectCard(project);
@@ -38,7 +40,7 @@ describe('Projects', () => {
     cy.selectTeamFilter(teamFilter, 'ongoing').then(() => {
       ongoingProjects.forEach((project) => {
         cy.getDataTest(project.dataTest).should(project.entity === teamFilter ? 'be.visible' : 'not.exist');
-      })
-    })
+      });
+    });
   });
 });

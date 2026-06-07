@@ -28,7 +28,7 @@ test.describe('GitHub Stats API Tests', () => {
     expect(githubStatsResponseBody.contributions).toBeInstanceOf(Array);
   });
 
-  // Don't run this test locally since 
+  // Don't run this test locally since
   if (!apiUrl.includes('localhost')) {
     test('POST /github-stats/ingest - should return a 401 status code and return a message indicating the secret is incorrect', async ({ request }) => {
       const githubStatsPromise = await request.post(`${apiUrl}/github-stats/ingest`, {
@@ -38,13 +38,13 @@ test.describe('GitHub Stats API Tests', () => {
       });
       const githubStatsResponse = await githubStatsPromise;
       const githubStatsResponseBody = await githubStatsResponse.json();
-  
+
       expect(githubStatsResponse.status()).toBe(401);
       expect(githubStatsResponseBody).toBeInstanceOf(Object);
       expect(githubStatsResponseBody.detail).toBe('Invalid or missing X-GitHub-Stats-Secret header');
     });
   }
-  
+
 
   // TODO: Add tests for the rate limit and for a successful ingestion using fixture response
 });
