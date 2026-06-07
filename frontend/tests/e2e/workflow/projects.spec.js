@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { verifyProjects } from '../../support/projects';
 
-const apiUrl = process.env.VITE_API_URL || 'https://portfolio.jakekohl.dev'
+const apiUrl = process.env.VITE_API_URL || 'https://portfolio.jakekohl.dev';
 
 test.describe('Projects Page', () => {
   const teamFilter = 'Tagboard';
@@ -39,7 +39,8 @@ test.describe('Projects Page', () => {
     await page.getByRole('option', { name: teamFilter }).click();
 
     for (const project of ongoingProjects) {
-      await expect(page.getByTestId(project.dataTest)).toBeVisible({visible: project.entity === teamFilter ? true : false});
+      await expect(page.getByTestId(project.dataTest))
+        .toBeVisible({ visible: project.entity === teamFilter ? true : false });
     }
   });
 
@@ -49,7 +50,8 @@ test.describe('Projects Page', () => {
     await page.getByRole('option', { name: teamFilter }).click();
 
     for (const project of completedProjects) {
-      await expect(page.getByTestId(project.dataTest)).toBeVisible({visible: project.entity === teamFilter ? true : false});
+      await expect(page.getByTestId(project.dataTest))
+        .toBeVisible({ visible: project.entity === teamFilter ? true : false });
     }
   });
 });
