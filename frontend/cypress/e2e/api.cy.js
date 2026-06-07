@@ -49,9 +49,9 @@ describe('API Tests', () => {
         expect(response.status).to.eq(200);
         expect(response.body).to.be.an('Object');
         expect(response.body).to.have.property('entities');
-        expect(response.body.entities).to.be.an('Array')
-      })
-    })
+        expect(response.body.entities).to.be.an('Array');
+      });
+    });
   });
 
   context('Contact', () => {
