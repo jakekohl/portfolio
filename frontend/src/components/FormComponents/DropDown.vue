@@ -48,7 +48,7 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  class: {
+  inputClass: {
     type: String,
     default: '',
   },
@@ -102,7 +102,7 @@ const pt = computed(() => ({
     :showClear="showClear"
     :filter="filter"
     :filterPlaceholder="filterPlaceholder"
-    :class="class"
+    :class="inputClass"
     :pt="pt"
     :data-test="dataTest"
   />
