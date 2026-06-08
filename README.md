@@ -17,3 +17,7 @@ The Frontend is a JavaScript based project (VueJS) that also contains Cypress an
 ## Getting Started
 
 Refer to the individual README.md files for backend/frontend deployments. With that said - docker container deployment will be implemented soon!
+
+## Open Source
+
+Want to use this as a starting point for your own portfolio? You can fork this repo and make it your own! With that said, this is offered as is and there is no guarantee for support or services, which should serve as a fun project for you. :)
