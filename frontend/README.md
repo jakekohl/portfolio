@@ -13,7 +13,7 @@ cd frontend
 npm i
 ```
 
-The frontend does leverage backend API calls to load data, so you will need to also get that running as well.
+The frontend does leverage backend API calls to load data, so you will need to also get that running as well if you wish to run this locally. 
 
 ## Cypress
 
@@ -53,6 +53,6 @@ npx playwright test --ui # Open Mode
 
 # set up the .env file using the .env example for local execution
 cp .env.example .env
-npxnpx playwright test # Run Mode
+npx playwright test # Run Mode
 npx playwright test --ui # Open Mode
 ```
