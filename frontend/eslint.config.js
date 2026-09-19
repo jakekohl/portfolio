@@ -283,4 +283,12 @@ export default defineConfig([
       'no-undef': 'off',
     },
   },
+
+  {
+    name: 'app/cypress-import-extensions',
+    files: ['**/*.cy.js'],
+    rules: {
+      'import/extensions': 'off',
+    },
+  },
 ]);
