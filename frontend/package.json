@@ -44,7 +44,7 @@
     "cypress": "^15.16.0",
     "eslint": "^9.31.0",
     "eslint-nibble": "^9.0.0",
-    "eslint-plugin-cypress": "^5.1.0",
+    "eslint-plugin-cypress": "^7.0.2",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vue": "~10.3.0",
     "globals": "^16.3.0",
