@@ -1,5 +1,5 @@
 describe('Projects', () => {
-  const apiUrl = Cypress.env('VITE_API_URL') || 'https://portfolio.jakekohl.dev';
+  const apiUrl = Cypress.expose('VITE_API_URL') || 'https://portfolio.jakekohl.dev';
 
   const ongoingProjects = [];
   const completedProjects = [];
