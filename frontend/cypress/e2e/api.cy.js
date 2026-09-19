@@ -1,4 +1,4 @@
-import { statusCodes } from '../support/helpers/http';
+import { statusCodes } from '../support/helpers/http.js';
 
 describe('API Tests', () => {
   const apiUrl = Cypress.expose('VITE_API_URL') || 'https://portfolio.jakekohl.dev';
