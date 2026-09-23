@@ -1,7 +1,8 @@
-name: Cypress Tests
+name: Cypress Cloud Run
 on:
-  pull_request:
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -16,6 +17,8 @@ jobs:
           working-directory: ./frontend
           start: npm run cy:ci
           wait-on: 'http://localhost:5173'
-          record: false
+          record: true
+          parallel: true
         env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
