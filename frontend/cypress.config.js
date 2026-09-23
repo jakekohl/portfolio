@@ -25,7 +25,7 @@ export default defineConfig({
       bundler: 'vite',
     },
   },
-  env: {
+  expose: {
     VITE_API_URL: process.env.VITE_API_URL || 'https://portfolio.jakekohl.dev',
   },
 });

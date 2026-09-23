@@ -41,7 +41,7 @@
     "@playwright/test": "^1.57.0",
     "@types/node": "^26.6.2",
     "@vitejs/plugin-vue": "^6.0.1",
-    "cypress": "^15.16.0",
+    "cypress": "16.1.0",
     "eslint": "^9.31.0",
     "eslint-nibble": "^9.1.1",
     "eslint-plugin-cypress": "^5.1.0",
