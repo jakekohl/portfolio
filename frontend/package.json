@@ -51,7 +51,7 @@
     "playwright": "^1.57.0",
     "sass-embedded": "^1.93.0",
     "start-server-and-test": "^2.0.12",
-    "vite": "^7.0.6",
+    "vite": "^8.3.0",
     "vite-plugin-vue-devtools": "^8.0.0"
   }
 }
