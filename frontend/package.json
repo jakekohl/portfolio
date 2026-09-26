@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@primeuix/themes": "^3.0.1",
-    "dotenv": "^17.2.3",
+    "dotenv": "^18.0.3",
     "path": "^0.12.7",
     "primeicons": "^8.0.1",
     "primevue": "^4.3.9",
