@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
-    "@playwright/test": "^1.57.0",
+    "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.4",
     "@vitejs/plugin-vue": "^6.0.1",
     "cypress": "16.1.1",
@@ -50,7 +50,7 @@
     "globals": "^17.14.0",
     "playwright": "^1.64.1",
     "sass-embedded": "^1.105.1",
-    "start-server-and-test": "^2.0.12",
+    "start-server-and-test": "^3.0.13",
     "vite": "^7.0.6",
     "vite-plugin-vue-devtools": "^8.2.1"
   }
