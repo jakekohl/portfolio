@@ -42,7 +42,7 @@
     "@types/node": "^26.6.4",
     "@vitejs/plugin-vue": "^6.0.10",
     "cypress": "16.1.1",
-    "eslint": "^9.31.0",
+    "eslint": "^10.14.0",
     "eslint-nibble": "^9.1.1",
     "eslint-plugin-cypress": "^5.1.0",
     "eslint-plugin-import": "^2.32.0",
