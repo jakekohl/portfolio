@@ -40,7 +40,7 @@
     "@eslint/js": "^9.31.0",
     "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.4",
-    "@vitejs/plugin-vue": "^6.0.1",
+    "@vitejs/plugin-vue": "^6.0.10",
     "cypress": "16.1.1",
     "eslint": "^9.31.0",
     "eslint-nibble": "^9.1.1",
@@ -51,7 +51,7 @@
     "playwright": "^1.64.1",
     "sass-embedded": "^1.105.1",
     "start-server-and-test": "^3.0.13",
-    "vite": "^7.3.7",
+    "vite": "^8.3.5",
     "vite-plugin-vue-devtools": "^8.2.1"
   }
 }
