@@ -28,7 +28,7 @@
     "lint:ci": "eslint ."
   },
   "dependencies": {
-    "@primeuix/themes": "^3.0.1",
+    "@primeuix/themes": "^3.1.0",
     "dotenv": "^18.0.9",
     "path": "^0.12.7",
     "primeicons": "^8.0.2",
